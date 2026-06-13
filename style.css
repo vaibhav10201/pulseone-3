@@ -159,7 +159,7 @@ body {
 .hero-block {
     position: relative;
     min-height: 95vh;
-    background-image: url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1920&q=80');
+    background-image: url('https://images.pexels.com/photos/9574568/pexels-photo-9574568.jpeg');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -399,7 +399,7 @@ body {
     left: 0;
     width: 90%;
     height: 90%;
-    background-image: url('https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80');
+    background-image: url('https://images.pexels.com/photos/3259625/pexels-photo-3259625.jpeg');
     background-size: cover;
     background-position: center;
     border-radius: 32px;
@@ -570,7 +570,7 @@ body {
    STAKEHOLDER SECTION (DARK ENVIRONMENT)
    ========================================================================== */
 .content-section-dark-bg {
-    background-image: url('https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1920&q=80');
+    background-image: url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=2000');
     background-size: cover;
     background-position: center;
     position: relative;
