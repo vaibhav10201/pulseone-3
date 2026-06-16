@@ -17,9 +17,7 @@
     <header class="main-header">
         <nav class="nav-container">
             <div class="logo-block" onclick="navigateTo('home')">
-                <img src="assets/logo.png" width="200" height="50" viewBox="0 0 24 24" fill="none"/>
-                
-                 
+                <img src="assets/logo.png" width="200" height="50" alt="PulseOne Logo"/>
             </div>
             <div class="nav-links">
                 <a href="#about" class="nav-item" onclick="navigateTo('about')">About Us</a>
@@ -27,7 +25,11 @@
                 <a href="#medical-access" class="nav-item" onclick="navigateTo('medical')">Medical Access Support</a>
                 <a href="#royalty" class="nav-item" onclick="navigateTo('royalty')">Royalty Program</a>
             </div>
-            <button class="btn-inquiry" onclick="openModal('Inquiry Workspace')">Submit Inquiry</button>
+            <!-- REMOVED: Submit Inquiry | ADDED: Explicit Routing Action Cluster -->
+            <div class="auth-action-group">
+                <button class="btn-login-ghost" onclick="window.location.href='auth.html'">Login</button>
+                <button class="btn-signup" onclick="window.location.href='auth.html'">Sign Up</button>
+            </div>
         </nav>
     </header>
 
@@ -45,8 +47,9 @@
                     <p class="hero-description">PulseOne connects hospitals, families, and diagnostics into one coordinated healthcare system.</p>
                     
                     <div class="hero-action-row">
-                        <button class="btn-primary" onclick="openModal('Appointment Scheduler')">Book Appointment</button>
-                        <button class="btn-secondary" onclick="openModal('Partnership Console')">Partner With PulseOne</button>
+                        <!-- Redirecting to Authentication/Onboarding Funnel Page -->
+                        <button class="btn-primary" onclick="window.location.href='auth.html'">Book Appointment</button>
+                        <button class="btn-secondary" onclick="window.location.href='auth.html'">Partner With PulseOne</button>
                     </div>
 
                     <div class="telemetry-row">
@@ -180,7 +183,7 @@
                             </div>
                             <h3>For Hospitals</h3>
                             <p>Structured patient inflow, membership-driven retention, and lifecycle engagement systems.</p>
-                            <button class="btn-card-action" onclick="openModal('Hospital Gateway')">Explore Hospital Partnership &rarr;</button>
+                            <button class="btn-card-action" onclick="window.location.href='auth.html'">Explore Hospital Partnership &rarr;</button>
                         </div>
                         <div class="stakeholder-card">
                             <div class="stakeholder-icon-box">
@@ -188,7 +191,7 @@
                             </div>
                             <h3>For Patients & Families</h3>
                             <p>Organized healthcare access, diagnostics, appointments, and support in one unified platform.</p>
-                            <button class="btn-card-action" onclick="navigateTo('royalty')">Join Royalty Membership &rarr;</button>
+                            <button class="btn-card-action" onclick="window.location.href='auth.html'">Join Royalty Membership &rarr;</button>
                         </div>
                         <div class="stakeholder-card">
                             <div class="stakeholder-icon-box">
@@ -196,7 +199,7 @@
                             </div>
                             <h3>For Strategic Partners</h3>
                             <p>Collaborate to strengthen India's healthcare delivery ecosystem through shared infrastructure.</p>
-                            <button class="btn-card-action" onclick="openModal('Partnership Desk')">Partner With PulseOne &rarr;</button>
+                            <button class="btn-card-action" onclick="window.location.href='auth.html'">Partner With PulseOne &rarr;</button>
                         </div>
                     </div>
                 </div>
@@ -242,8 +245,8 @@
                     <h2 class="serif-title-callout">Ready to Build the Future of Healthcare?</h2>
                     <p class="callout-desc">Join PulseOne and become part of a structured ecosystem redefining modern medical delivery.</p>
                     <div class="callout-btn-row">
-                        <button class="btn-callout-primary" onclick="openModal('Partnership Console')">Contact Partnership Team &rarr;</button>
-                        <button class="btn-callout-secondary" onclick="openModal('Case Study Desk')">View Case Studies</button>
+                        <button class="btn-callout-primary" onclick="window.location.href='auth.html'">Contact Partnership Team &rarr;</button>
+                        <button class="btn-callout-secondary" onclick="window.location.href='auth.html'">View Case Studies</button>
                     </div>
                 </div>
             </div>
@@ -326,7 +329,7 @@
                         <li><span class="check-bullet">&checkmark;</span> Treatment pathway guidance</li>
                         <li><span class="check-bullet">&checkmark;</span> Structured financial access assistance</li>
                     </ul>
-                    <button class="btn-dark-hero" onclick="openModal('Surgery Concierge')">Request Surgery Consultation &rarr;</button>
+                    <button class="btn-dark-hero" onclick="window.location.href='auth.html'">Request Surgery Consultation &rarr;</button>
                 </div>
                 <div class="graphic-side-column flex-center">
                     <div class="dark-box-card">
@@ -369,8 +372,7 @@
         <div class="footer-primary-layout">
             <div class="footer-branding-cell">
                 <div class="logo-block-footer">
-                         <img src="assets/logo.png" width="200" height="50" viewBox="0 0 24 24" fill="none"/>
-            
+                     <img src="assets/logo.png" width="200" height="50" alt="PulseOne Logo"/>
                 </div>
                 <p class="footer-mission-text">Structured healthcare infrastructure designed to connect hospitals, patients, and diagnostics into one seamless system.</p>
                 <div class="social-icon-row">
@@ -385,7 +387,7 @@
             <div class="footer-links-column">
                 <h4>Company</h4>
                 <a href="#about" onclick="navigateTo('about')">About Us</a>
-                <a href="#contact" onclick="openModal('Contact Center')">Contact</a>
+                <a href="#contact" onclick="window.location.href='auth.html'">Contact</a>
             </div>
             <div class="footer-links-column">
                 <h4>Solutions</h4>
@@ -396,7 +398,7 @@
             <div class="footer-links-column">
                 <h4>Programs</h4>
                 <a href="#royalty" onclick="navigateTo('royalty')">Royalty Membership</a>
-                <a href="#partner" onclick="openModal('Partnership Console')">Partner With Us</a>
+                <a href="#partner" onclick="window.location.href='auth.html'">Partner With Us</a>
             </div>
         </div>
         <div class="footer-bottom-bar">
@@ -407,30 +409,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Interactive Workspace Overlay (Modal Window) -->
-    <div id="interactive-modal" class="modal-blur-overlay">
-        <div class="modal-surface-container">
-            <div class="modal-header-row">
-                <h3 id="modal-workspace-title">Data Transmission Workspace</h3>
-                <button class="close-modal-trigger" onclick="closeModal()">&times;</button>
-            </div>
-            <div class="modal-body-content">
-                <p>Submit your parameters to the secure PulseOne system.</p>
-                <form id="workspace-form" onsubmit="handleFormSubmission(event)">
-                    <div class="input-form-group">
-                        <label>Full Representative Name</label>
-                        <input type="text" placeholder="John Doe" required />
-                    </div>
-                    <div class="input-form-group">
-                        <label>Secure Communication Email</label>
-                        <input type="email" placeholder="johndoe@pulseone.com" required />
-                    </div>
-                    <button type="submit" class="btn-primary full-width-modifier">Submit Verification Stream</button>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <!-- Script Block -->
     <script src="script.js"></script>
