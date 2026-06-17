@@ -10,6 +10,78 @@ let patientState = {
     activeBroadcastInterval: null
 };
 
+
+const doctorsDatabase = [
+
+{
+    id:1,
+    name:"Dr. Sarah Jenkins",
+    gender:"female",
+    specialty:"General Physician",
+    disease:["fever","cold","cough","heart"],
+    experience:12,
+    fee:500,
+    rating:4.9,
+    mode:"clinic",
+    image:"https://i.pravatar.cc/200?img=32",
+    hospital:"PulseOne City Hospital",
+    address:"Civil Lines, Kanpur",
+    availability:"Available Today"
+},
+
+{
+    id:2,
+    name:"Dr. Anand Verma",
+    gender:"male",
+    specialty:"Dermatologist",
+    disease:["skin","acne"],
+    experience:14,
+    fee:700,
+    rating:4.8,
+    mode:"video",
+    image:"https://i.pravatar.cc/200?img=12",
+    hospital:"SkinCare Clinic",
+    address:"Swaroop Nagar, Kanpur",
+    availability:"Available Today"
+},
+
+{
+    id:3,
+    name:"Dr. Priya Nair",
+    gender:"female",
+    specialty:"Gynecologist",
+    disease:["pregnancy","women"],
+    experience:18,
+    fee:900,
+    rating:4.9,
+    mode:"clinic",
+    image:"https://i.pravatar.cc/200?img=44",
+    hospital:"Mother Care Hospital",
+    address:"Kakadeo, Kanpur",
+    availability:"Available Tomorrow"
+},
+
+{
+    id:4,
+    name:"Dr. Raj Patel",
+    gender:"male",
+    specialty:"Cardiologist",
+    disease:["heart","bp"],
+    experience:20,
+    fee:1200,
+    rating:4.8,
+    mode:"video",
+    image:"https://i.pravatar.cc/200?img=15",
+    hospital:"PulseOne Heart Centre",
+    address:"GSVM Area, Kanpur",
+    availability:"Available Today"
+}
+
+];
+
+
+
+
 // Mock Inbound Quote Data Stream Repositories Mapped by Requirement Category
 const providerBiddingStreams = {
     "fever": [
@@ -35,6 +107,7 @@ const providerBiddingStreams = {
 // Initialize system displays upon DOM ready state
 document.addEventListener("DOMContentLoaded", () => {
     refreshWalletInterfaceDisplays();
+     renderDoctors(doctorsDatabase);
 });
 
 /* ==========================================================================
@@ -67,32 +140,174 @@ function dismissNotificationBanner() {
    ========================================================================== */
 
 function executeAdvancedFilterSearch() {
-    const searchQuery = document.getElementById('medical-query').value.trim().toLowerCase();
-    const doctorType = document.getElementById('filter-doctor-type').value;
-    const diseaseType = document.getElementById('filter-disease-type').value;
-    const priceType = document.getElementById('filter-price-type').value;
 
-    const cards = document.querySelectorAll('.doctor-profile-card-node');
+    const query =
+        document.getElementById("medical-query")
+        .value
+        .toLowerCase()
+        .trim();
 
-    cards.forEach(card => {
-        const cardSpecialist = card.getAttribute('data-specialist');
-        const cardDisease = card.getAttribute('data-disease');
-        const cardPricingFormat = card.getAttribute('data-pricing');
-        const cardTextContent = card.innerText.toLowerCase();
+    const gender = 
+        document.getElementById("filter-doctor-gender")
+        .value;
 
-        let matchesSearch = !searchQuery || cardTextContent.includes(searchQuery);
-        let matchesSpecialist = (doctorType === 'all') || (cardSpecialist === doctorType);
-        let matchesDisease = (diseaseType === 'all') || (cardDisease === diseaseType);
-        let matchesPricing = (priceType === 'all') || (cardPricingFormat === priceType);
+    const experience =
+        document.getElementById("filter-experience")
+        .value
+        .toLowerCase();
 
-        if (matchesSearch && matchesSpecialist && matchesDisease && matchesPricing) {
-            card.style.display = 'flex';
-        } else {
-            card.style.display = 'none';
-        }
+    const fee =
+        document.getElementById("filter-fees")
+        .value;
+
+    const rating =
+        document.getElementById("filter-rating")
+        .value;
+
+    const mode =
+        document.getElementById("filter-mode")
+        .value;
+
+    const filteredDoctors = doctorsDatabase.filter(doc => {
+
+        const matchesQuery =
+            query === "" ||
+            doc.name.toLowerCase().includes(query) ||
+            doc.specialty.toLowerCase().includes(query) ||
+            doc.disease.some(d =>
+                d.toLowerCase().includes(query)
+            );
+
+        const matchesGender =
+        gender === "all" ||
+        doc.gender === gender;
+
+        const matchesExperience =
+            experience === "all" ||
+            doc.experience >= Number(experience);
+
+        const matchesFee =
+            fee === "all" ||
+            doc.fee <= Number(fee);
+
+        const matchesRating =
+            rating === "all" ||
+            doc.rating >= Number(rating);
+
+        const matchesMode =
+            mode === "all" ||
+            doc.mode === mode;
+
+        return (
+            matchesQuery &&
+            matchesExperience &&
+            matchesFee &&
+            matchesRating &&
+            matchesMode
+        );
+
     });
 
-    triggerNotificationSynapse("Directory filters applied. Matching results categorized below.");
+    renderDoctors(filteredDoctors);
+
+    triggerNotificationSynapse(
+        `${filteredDoctors.length} doctors found`
+    );
+}
+
+function renderDoctors(doctors) {
+
+    const container = document.getElementById("doctor-results-grid");
+
+    container.innerHTML = "";
+
+    if (doctors.length === 0) {
+        container.innerHTML = `
+            <div class="no-doctor-found">
+                <h3>No Doctors Found</h3>
+                <p>Try changing your filters.</p>
+            </div>
+        `;
+        return;
+    }
+
+    doctors.forEach(doc => {
+
+        container.innerHTML += `
+
+        <div class="doctor-card-horizontal">
+
+            <!-- LEFT SIDE -->
+            <div class="doctor-left">
+                <img
+                    src="${doc.image}"
+                    alt="${doc.name}"
+                    class="doctor-profile-image"
+                >
+            </div>
+
+            <!-- CENTER -->
+            <div class="doctor-center">
+
+                <h3>${doc.name}</h3>
+
+                <div class="doctor-speciality">
+                    ${doc.specialty}
+                </div>
+
+                <div class="doctor-experience">
+                    🩺 ${doc.experience}+ Years Experience
+                </div>
+
+                <div class="doctor-hospital">
+                    🏥 ${doc.hospital}
+                </div>
+
+                <div class="doctor-address">
+                    📍 ${doc.address}
+                </div>
+
+                <div class="doctor-rating">
+                    ⭐ ${doc.rating} Rating
+                </div>
+
+                <div class="doctor-availability">
+                    ${doc.availability}
+                </div>
+
+            </div>
+
+            <!-- RIGHT -->
+            <div class="doctor-right">
+
+                <div class="consult-fee">
+                    ₹${doc.fee}
+                </div>
+
+                <div class="fee-label">
+                    Consultation Fee
+                </div>
+
+                <button
+                    class="book-btn"
+                    onclick="initializeConsultationBooking('${doc.name}', ${doc.fee}, 'Clinic Appointment')"
+                >
+                    Book Appointment
+                </button>
+
+                <button
+                    class="video-btn"
+                    onclick="initializeConsultationBooking('${doc.name}', ${doc.fee}, 'Video Consultation')"
+                >
+                    Video Consultation
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+    });
 }
 
 function clearFilterParameters() {
@@ -270,3 +485,157 @@ function refreshWalletInterfaceDisplays() {
     if (targetHeader) targetHeader.innerText = formattedStr;
     if (targetModal) targetModal.innerText = formattedStr;
 }
+
+
+
+
+
+
+function executeAdvancedFilterSearch(){
+
+    const disease =
+        document.getElementById("medical-query")
+        .value
+        .toLowerCase();
+
+    const exp =
+        document.getElementById("filter-experience")
+        .value;
+
+    const fee =
+        document.getElementById("filter-fees")
+        .value;
+
+    const rating =
+        document.getElementById("filter-rating")
+        .value;
+
+    const mode =
+        document.getElementById("filter-mode")
+        .value;
+
+    let results = doctorsDatabase.filter(doc=>{
+
+        let matchDisease =
+            disease === ""
+            || doc.disease.some(d =>
+                d.includes(disease));
+
+        let matchExp =
+            exp === "all"
+            || doc.experience >= parseInt(exp);
+
+        let matchFee =
+            fee === "all"
+            || doc.fee <= parseInt(fee);
+
+        let matchRating =
+            rating === "all"
+            || doc.rating >= parseFloat(rating);
+
+        let matchMode =
+            mode === "all"
+            || doc.mode === mode;
+
+        return (
+            matchDisease &&
+            matchExp &&
+            matchFee &&
+            matchRating &&
+            matchMode
+        );
+    });
+
+    renderDoctors(results);
+}
+
+function renderDoctors(doctors){
+
+    const container =
+    document.getElementById(
+        "doctor-results-grid"
+    );
+
+    container.innerHTML = "";
+
+    if(doctors.length===0){
+
+        container.innerHTML = `
+        <h3>No Doctors Found</h3>
+        `;
+
+        return;
+    }
+
+    doctors.forEach(doc=>{
+
+        container.innerHTML += `
+
+        <div class="doctor-card-horizontal">
+
+            <div class="doctor-left">
+
+                <img
+                    src="${doc.image}"
+                    alt="${doc.name}"
+                    class="doctor-profile-image"
+                >
+
+            </div>
+
+            <div class="doctor-center">
+
+                <h3>${doc.name}</h3>
+
+                <div class="doctor-speciality">
+                    ${doc.specialty}
+                </div>
+
+                <div class="doctor-experience">
+                    ${doc.experience}+ Years Experience
+                </div>
+
+                <div class="doctor-hospital">
+                    🏥 ${doc.hospital}
+                </div>
+
+                <div class="doctor-address">
+                    📍 ${doc.address}
+                </div>
+
+                <div class="doctor-rating">
+                    ⭐ ${doc.rating}
+                </div>
+
+                <div class="doctor-availability">
+                    ${doc.availability}
+                </div>
+
+            </div>
+
+            <div class="doctor-right">
+
+                <div class="consult-fee">
+                    ₹${doc.fee}
+                </div>
+
+                <div class="fee-label">
+                    Consultation Fee
+                </div>
+
+                <button class="book-btn">
+                    Book Appointment
+                </button>
+
+                <button class="video-btn">
+                    Video Consult
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+    });
+}
+

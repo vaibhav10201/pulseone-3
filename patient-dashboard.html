@@ -60,6 +60,7 @@
     <!-- Master Workspace Container Frame -->
     <main class="dashboard-viewport-frame adaptive-padding-top">
 
+
         <!-- ==========================================
              SECTION 1: DISCOVERY & ADVANCED FILTRATION HUB
              ========================================== -->
@@ -69,6 +70,18 @@
                 <p class="search-hero-subtitle">Access clinical routing paths, video synapses, and broadcast care requests for real-time competitive quotes.</p>
             </div>
 
+
+          <!-- BROADCAST ACTION INTERCEPT CALLOUT BOX -->
+            <div class="broadcast-trigger-callout-card">
+                <div class="broadcast-meta-pack">
+                    <h4>Want Competitive Pricing Options?</h4>
+                    <p>Broadcast your disease parameters or required medical tests to nearby clinics, hospitals, and doctors to receive instant competitive quotes in real-time.</p>
+                </div>
+                <button class="btn-broadcast-action" onclick="initializeLiveNetworkBroadcast()">Broadcast Request To Network &rarr;</button>
+            </div>
+
+
+
             <!-- Double Input Search Node Layout Block -->
             <div class="smart-search-infrastructure-bar">
                 <div class="search-location-cell">
@@ -77,53 +90,99 @@
                 </div>
                 <div class="search-query-cell">
                     <span class="cell-icon-marker">&#128269;</span>
-                    <input type="text" id="medical-query" placeholder="Search diseases, required tests, or specific symptoms...">
-                </div>
+<input
+    type="text"
+    id="medical-query"
+    list="diseases"
+    placeholder="Enter disease"
+/>
+
+<datalist id="diseases">
+    <option value="Fever">
+    <option value="Cough">
+    <option value="Cold">
+    <option value="Pregnancy">
+    <option value="Diabetes">
+    <option value="Skin">
+    <option value="Acne">
+    <option value="Allergy">
+    <option value="Headache">
+</datalist>                </div>
                 <button class="btn-search-trigger" onclick="executeAdvancedFilterSearch()">Find Medical Node</button>
             </div>
 
             <!-- ADVANCED SEARCH FILTERS PANEL SUB-GRID -->
             <div class="advanced-filter-parameter-panel">
+
                 <div class="filter-dropdown-selector">
-                    <label>Specialist Class</label>
-                    <select id="filter-doctor-type">
-                        <option value="all">All Specialists</option>
-                        <option value="dermatologist">Dermatologist</option>
-                        <option value="pediatrician">Pediatrician</option>
-                        <option value="general-physician">General Physician</option>
-                        <option value="gynecologist">Gynecologist</option>
+                    <label>Gender</label>
+                    <select id="filter-doctor-gender">
+                        <option value="all">Any Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
                     </select>
                 </div>
+
+
                 <div class="filter-dropdown-selector">
-                    <label>Clinical Condition / Test Type</label>
-                    <select id="filter-disease-type">
-                        <option value="all">All Requirements</option>
-                        <option value="fever">Cold, Cough & Fever</option>
-                        <option value="skin">Acne & Skin Issues</option>
-                        <option value="pregnancy">Pregnancy Concerns</option>
-                        <option value="cbc-test">Complete Blood Count (CBC Test)</option>
+                    <label>Experience</label>
+                    <select id="filter-experience">
+                        <option value="all">Any Experience</option>
+                        <option value="5">5+ Years</option>
+                        <option value="10">10+ Years</option>
+                        <option value="15">15+ Years</option>
                     </select>
                 </div>
+
                 <div class="filter-dropdown-selector">
-                    <label>Pricing Structure</label>
-                    <select id="filter-price-type">
-                        <option value="all">All Formats</option>
-                        <option value="fixed">Fixed Consultation Fee</option>
-                        <option value="bidding">Accepting Live Bids</option>
+                    <label>Consultation Fee</label>
+                    <select id="filter-fees">
+                        <option value="all">Any Fee</option>
+                        <option value="500">Below ₹500</option>
+                        <option value="1000">Below ₹1000</option>
+                        <option value="1500">Below ₹1500</option>
                     </select>
                 </div>
-                <button class="btn-clear-filters-ghost" onclick="clearFilterParameters()">Reset Filters</button>
+
+                <div class="filter-dropdown-selector">
+                    <label>Rating</label>
+                    <select id="filter-rating">
+                        <option value="all">All Ratings</option>
+                        <option value="4">4+ Rating</option>
+                        <option value="4.5">4.5+ Rating</option>
+                    </select>
+                </div>
+
+                <div class="filter-dropdown-selector">
+                    <label>Consultation Type</label>
+                    <select id="filter-mode">
+                        <option value="all">All</option>
+                        <option value="clinic">In Clinic</option>
+                        <option value="video">Video Consult</option>
+                    </select>
+                </div>
+
             </div>
 
-            <!-- BROADCAST ACTION INTERCEPT CALLOUT BOX -->
-            <div class="broadcast-trigger-callout-card">
-                <div class="broadcast-meta-pack">
-                    <h4>Want Competitive Pricing Options?</h4>
-                    <p>Broadcast your disease parameters or required medical tests to nearby clinics, hospitals, and doctors to receive instant competitive quotes in real-time.</p>
-                </div>
-                <button class="btn-broadcast-action" onclick="initializeLiveNetworkBroadcast()">Broadcast Request To Network &rarr;</button>
+            
+                </section>
+        <section id="doctor-search-results">
+
+            <div class="section-header-left-aligned">
+                <h2>Available Doctors</h2>
+                <p>Matching doctors based on your search.</p>
             </div>
+
+            <div id="doctor-results-grid"></div>
+
         </section>
+
+
+       
+
+
+
+
 
         <!-- ==========================================
              NEW ADDITION: FEATURED GENERAL DOCTORS (UPFRONT LIST)
@@ -149,7 +208,7 @@
                     </div>
                     <div class="mini-card-bottom">
                         <span class="mini-fee">₹350 <small>(Fixed)</small></span>
-                        <button class="btn-mini-consult" onclick="initializeConsultationBooking('Dr. Alok Rai', 350, 'Upfront Consult')">Consult Now</button>
+                        <button class="btn-mini-consult" onclick=" renderDoctors(doctorsDatabase)">Consult Now</button>
                     </div>
                 </div>
 
