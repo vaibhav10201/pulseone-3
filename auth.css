@@ -1,0 +1,435 @@
+/* ==========================================================================
+   AUTHENTICATION WIZARD GATEKEEPER COMPONENT STYLES (RESTORED MASTER)
+   ========================================================================== */
+
+/* Base Setup Overrides */
+.auth-engine-body {
+    background-color: #041310;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-sans);
+}
+
+/* Two-Column Layout Wrapper */
+.auth-split-wrapper {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    width: 100vw;
+    min-height: 100vh;
+    background-color: var(--clr-stark-white);
+}
+
+/* ==========================================================================
+   LEFT SIDE BRAND CANVAS PANEL
+   ========================================================================== */
+.auth-canvas-panel {
+    background-image: url('https://images.pexels.com/photos/7578795/pexels-photo-7578795.jpeg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--clr-stark-white);
+}
+
+.canvas-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(180deg, rgba(10, 41, 35, 0.85) 0%, #061A16 100%);
+    z-index: 1;
+}
+
+.canvas-branding, 
+.canvas-statement-box {
+    position: relative;
+    z-index: 2;
+}
+
+.serif-title-canvas {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    color: var(--clr-emerald);
+}
+
+.auth-canvas-panel p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 15px;
+}
+
+/* ==========================================================================
+   RIGHT SIDE CONTROL WORKSPACE INTERFACE
+   ========================================================================== */
+.auth-control-panel {
+    padding: 60px 12%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #FAFCFB;
+}
+
+/* Context Toggle Header Switch row */
+.context-toggle-row {
+    display: flex;
+    background: #EBF2EE;
+    padding: 6px;
+    border-radius: 30px;
+    margin-bottom: 40px;
+    max-width: 360px;
+    width: 100%;
+}
+
+.btn-toggle {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 12px 24px;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--clr-text-muted);
+    border-radius: 24px;
+    cursor: pointer;
+    transition: var(--transition-snappy);
+}
+
+.btn-toggle.active {
+    background: var(--clr-stark-white);
+    color: var(--clr-navy);
+    box-shadow: 0 4px 12px rgba(10, 41, 35, 0.05);
+}
+
+/* Form Layer Handling Controllers */
+.auth-form-layer {
+    display: none;
+}
+.auth-form-layer.dynamic-active {
+    display: block;
+}
+
+.form-context-header {
+    margin-bottom: 32px;
+}
+
+.form-context-header h3 {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--clr-navy);
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+.form-context-header p {
+    font-size: 14px;
+    color: var(--clr-text-muted);
+}
+
+/* Sub-Wizard Pipeline Visibility Parameters */
+.signup-pipeline-node {
+    display: none;
+}
+.signup-pipeline-node.active {
+    display: block;
+}
+
+.pipeline-breadcrumb {
+    font-size: 13px;
+    font-weight: 600;
+    color: #15803D;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+}
+
+.input-form-group-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+/* ==========================================================================
+   ROLE MATRIX CARD SELECTORS GRID
+   ========================================================================== */
+.role-matrix-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.role-selector-card {
+    background: var(--clr-stark-white);
+    border: 1px solid #DCE6E2;
+    border-radius: 16px;
+    padding: 24px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    position: relative;
+}
+
+.role-selector-card:hover {
+    border-color: var(--clr-emerald);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(10, 41, 35, 0.04);
+}
+
+.role-icon-indicator {
+    position: absolute;
+    right: 24px; top: 24px;
+    width: 28px; height: 28px;
+    background: var(--clr-mint-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #15803D;
+    font-weight: bold;
+}
+
+.role-selector-card h4 {
+    font-size: 16px;
+    color: var(--clr-navy);
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.role-selector-card p {
+    font-size: 13px;
+    color: var(--clr-text-muted);
+    line-height: 1.5;
+}
+
+/* Enterprise Fallback Info Card Box */
+.enterprise-fallback-notice-card {
+    background: var(--clr-light-gray);
+    border: 1px solid #CCDAD4;
+    padding: 24px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+
+.enterprise-fallback-notice-card p {
+    font-size: 14px;
+    color: var(--clr-text-muted);
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   STAGE 1 & 2: DRAFT IFRAMES, ESIGNS & DOCUMENT DROPZONES 
+   ========================================================================== */
+.native-pdf-iframe-container {
+    width: 100%;
+    height: 440px;
+    background: #FAFCFB;
+    border: 1px solid #CCDAD4;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.agreement-flow-actions {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 16px;
+}
+
+.btn-pdf-download-action {
+    background: rgba(70, 228, 131, 0.1);
+    color: #15803D;
+    border: 1px solid rgba(70, 228, 131, 0.3);
+    padding: 14px;
+    border-radius: 10px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.btn-pdf-download-action:hover {
+    background: var(--clr-emerald);
+    color: var(--clr-navy);
+}
+
+.btn-flow-advance {
+    background: var(--clr-navy);
+    border: none;
+    color: var(--clr-stark-white);
+    padding: 14px;
+    border-radius: 10px;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.btn-flow-advance:hover {
+    background: #12473D;
+}
+
+.disabled-opacity-lock {
+    opacity: 0.5;
+    cursor: not-allowed !important;
+}
+
+/* Multi-File Upload Grid Ingestor Modules */
+.document-upload-matrix {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.upload-dropzone-box {
+    border: 2px dashed #CCDAD4;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    padding: 24px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.upload-dropzone-box label {
+    cursor: pointer;
+    display: block;
+}
+
+.upload-dropzone-box:hover {
+    border-color: var(--clr-emerald);
+    background: var(--clr-light-gray);
+}
+
+.upload-icon {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 6px;
+    color: var(--clr-text-muted);
+}
+
+.upload-dropzone-box strong {
+    display: block;
+    font-size: 13px;
+    color: var(--clr-navy);
+}
+
+.upload-dropzone-box span {
+    font-size: 11px;
+    color: var(--clr-text-muted);
+}
+
+.bg-tint-upload-zone {
+    background: #F0FDF4 !important;
+    border-color: #A7F3D0 !important;
+}
+
+.four-cell-upload-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+}
+
+/* ==========================================================================
+   STAGE 3: COMPLIANCE DATA CERTIFICATE MANIFEST
+   ========================================================================== */
+.receipt-manifest-display-card {
+    background: #FFFFFF;
+    border: 1px solid #D1E0DA;
+    border-top: 4px solid var(--clr-emerald);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 24px;
+    font-family: var(--font-sans);
+    box-shadow: 0 10px 30px rgba(10,41,35,0.03);
+}
+
+.receipt-header-branding {
+    text-align: center;
+    border-bottom: 1px solid #E6EEEA;
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+}
+
+.receipt-header-branding h4 {
+    font-size: 14px;
+    color: var(--clr-navy);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.receipt-header-branding p {
+    font-size: 11px;
+    color: var(--clr-text-muted);
+}
+
+.receipt-parameter-body-rows p {
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: var(--clr-text-main);
+    border-bottom: 1px dashed #F0F5F2;
+    padding-bottom: 6px;
+}
+
+.receipt-parameter-body-rows p strong {
+    color: var(--clr-navy);
+}
+
+.receipt-appended-signature-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-top: 24px;
+    padding-top: 16px;
+}
+
+.rec-sig-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.rec-sig-box span {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--clr-text-muted);
+    text-transform: uppercase;
+}
+
+.img-mock-salman-sig-embedded {
+    height: 50px;
+    background-image: url('https://i.imgur.com/e2oEdfz.png'), url('https://i.imgur.com/bH05hR1.png'); 
+    background-size: 55px auto, contain;
+    background-repeat: no-repeat;
+    background-position: bottom right, bottom left;
+    border-bottom: 1px solid #CCDAD4;
+}
+
+.img-mock-partner-sig-target {
+    height: 50px;
+    border-bottom: 1px solid #CCDAD4;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 2px;
+}
+
+/* Responsive Media Viewport Breaks */
+@media(max-width: 900px) {
+    .auth-split-wrapper {
+        grid-template-columns: 1fr;
+    }
+    .auth-canvas-panel {
+        display: none;
+    }
+    .auth-control-panel {
+        padding: 60px 8%;
+    }
+    .four-cell-upload-grid {
+        grid-template-columns: 1fr !important;
+    }
+}

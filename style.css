@@ -2978,3 +2978,415 @@ body {
     background: #FEF2F2;
     border-color: #FEE2E2;
 }
+
+/* ==========================================================================
+   OFFICIAL STRATEGIC CONTRACT VIEW & TABULAR PARAMETERS TYPOGRAPHY
+   ========================================================================== */
+.legal-document-strict-typography h5 {
+    color: var(--clr-emerald);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 20px 0 6px 0;
+    letter-spacing: 0.5px;
+}
+
+.legal-document-strict-typography ul {
+    padding-left: 20px;
+    margin-bottom: 12px;
+}
+
+.legal-document-strict-typography li {
+    font-size: 12.5px;
+    margin-bottom: 4px;
+}
+
+.legal-divider {
+    border: none;
+    border-top: 1px dashed rgba(255,255,255,0.15);
+    margin: 24px 0;
+}
+
+/* Compliance Document Embed Data Matrix Table */
+.compliance-data-table-sandbox {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 12px;
+}
+
+.compliance-data-table-sandbox th {
+    background: #192723;
+    color: var(--clr-emerald);
+    text-align: left;
+    padding: 8px 12px;
+    font-weight: 600;
+    border: 1px solid #233430;
+}
+
+.compliance-data-table-sandbox td {
+    padding: 8px 12px;
+    border: 1px solid #233430;
+    color: rgba(255,255,255,0.8);
+}
+
+/* Four Corner Cell Form Grid Upload Adaptation */
+.four-cell-upload-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+}
+
+.btn-pdf-download-action {
+    background: rgba(70, 228, 131, 0.1);
+    color: var(--clr-emerald);
+    border: 1px solid rgba(70, 228, 131, 0.3);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-pdf-download-action:hover {
+    background: var(--clr-emerald);
+    color: var(--clr-navy);
+}
+
+@media(max-width: 600px) {
+    .four-cell-upload-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+/* ==========================================================================
+   HIGH-COMPLIANCE CANVAS OVERLAY DOCUMENT INGESTION STYLING
+   ========================================================================== */
+
+.compact-notice-pdf-box {
+    padding: 30px;
+    background: #FAFCFB;
+    border: 1px dashed #A3C2B6;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.compact-notice-pdf-box h4 {
+    color: var(--clr-navy);
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.compact-notice-pdf-box p {
+    color: var(--clr-text-muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* Document Printing Canvas Positioning Controllers */
+.canvas-overlay-document-layout {
+    background: #64748B !important; /* Emulates grey corporate PDF viewer spaces */
+    padding: 20px 0 !important;
+    height: 450px !important; /* Preserves a scroller window during view review */
+}
+
+.pdf-emulated-page-node {
+    width: 100%;
+    max-width: 595px; /* Perfect A4 mathematical proportion constraint rules */
+    height: 842px;    /* Locks heights globally across canvas page sweeps */
+    margin: 0 auto 24px auto;
+    background: #FFFFFF;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    overflow: hidden;
+}
+
+.pdf-emulated-page-node-spacer-notice {
+    width: 100%;
+    max-width: 595px;
+    margin: 12px auto;
+    background: rgba(255,255,255,0.05);
+    border: 1px dashed rgba(255,255,255,0.2);
+    color: #94A3B8;
+    padding: 16px;
+    text-align: center;
+    font-size: 11px;
+}
+
+/* Original Contract Page Layout Layers - Direct Background Reference Ingestion */
+.original-document-mock-backdrop-page-1 {
+    position: absolute;
+    width: 100%; height: 100%;
+    background-image: url('https://i.imgur.com/E8WbN2w.png'); /* Emulated template wrapper link page 1 */
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+
+.original-document-mock-backdrop-page-8 {
+    position: absolute;
+    width: 100%; height: 100%;
+    background-image: url('https://i.imgur.com/vH2kQ4w.png'); /* Emulated template wrapper link page 8 */
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+
+.canvas-dynamic-overlay-layer {
+    position: absolute;
+    width: 100%; height: 100%;
+    z-index: 2; /* Sits text layers directly on top of backend page background graphics */
+    font-family: var(--font-sans);
+    color: #0F172A;
+}
+
+/* Target Positioning Anchors Mapping Values Onto Text Lines Perfectly */
+.absolute-placement-token {
+    position: absolute;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.text-date-line {
+    top: 142px;
+    left: 410px;
+}
+
+.text-partner-name-line {
+    top: 288px;
+    left: 85px;
+}
+
+/* Signatures & Stamp Page Layout Structure Maps */
+.signatures-page-adjustment-layer {
+    display: flex;
+    justify-content: space-between;
+    padding: 560px 50px 0 50px; /* Positions elements over the original footer sign slots */
+}
+
+.pulseone-salman-ceo-stamp-box {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.official-zeencare-stamp-image-layer {
+    height: 70px;
+    /* Loads high fidelity transparent alpha blending vectors for the stamp watermark layer[cite: 1] */
+    background-image: url('https://i.imgur.com/e2oEdfz.png'), url('https://i.imgur.com/bH05hR1.png'); 
+    background-size: 65px auto, contain;
+    background-repeat: no-repeat;
+    background-position: bottom right, bottom left;
+}
+
+.partner-dynamic-execution-box-layer {
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+}
+
+.injected-signature-graphic-frame {
+    height: 55px;
+    border-bottom: 1px dashed #64748B;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 6px;
+}
+
+.partner-text-block-meta-data p {
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 2px !important;
+    color: #334155 !important;
+}
+/* ==========================================================================
+   NATIVE IFRAME EMBED CORES & CONTRACT MANIFEST CARDS
+   ========================================================================== */
+
+.native-pdf-iframe-container {
+    width: 100%;
+    height: 440px;
+    background: #FAFCFB;
+    border: 1px solid #CCDAD4;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+/* Executed Certificate Manifest Block Layout */
+.receipt-manifest-display-card {
+    background: #FFFFFF;
+    border: 1px solid #D1E0DA;
+    border-top: 4px solid var(--clr-emerald);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 24px;
+    font-family: var(--font-sans);
+    box-shadow: 0 10px 30px rgba(10,41,35,0.03);
+}
+
+.receipt-header-branding {
+    text-align: center;
+    border-bottom: 1px solid #E6EEEA;
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+}
+
+.receipt-header-branding h4 {
+    font-size: 14px;
+    color: var(--clr-navy);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.receipt-parameter-body-rows p {
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: var(--clr-text-main);
+    border-bottom: 1px dashed #F0F5F2;
+    padding-bottom: 6px;
+}
+
+.receipt-parameter-body-rows p strong {
+    color: var(--clr-navy);
+}
+
+.receipt-appended-signature-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-top: 24px;
+    padding-top: 16px;
+}
+
+.rec-sig-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.rec-sig-box span {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--clr-text-muted);
+    text-transform: uppercase;
+}
+
+.img-mock-salman-sig-embedded {
+    height: 50px;
+    /* Loads the official signatory signature stamp directly into the finalized certificate box layer[cite: 1] */
+    background-image: url('https://i.imgur.com/e2oEdfz.png'), url('https://i.imgur.com/bH05hR1.png'); 
+    background-size: 55px auto, contain;
+    background-repeat: no-repeat;
+    background-position: bottom right, bottom left;
+    border-bottom: 1px solid #CCDAD4;
+}
+
+.img-mock-partner-sig-target {
+    height: 50px;
+    border-bottom: 1px solid #CCDAD4;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 2px;
+}
+/* ==========================================================================
+   HIGH-FIDELITY MULTI-PAGE PRINT CANVAS LAYOUT DEFINITIONS
+   ========================================================================== */
+
+.scrollable-sandbox-height-box .pdf-scroller-canvas {
+    height: 500px !important;
+    overflow-y: scroll;
+    background: #FFFFFF !important;
+    border: 1px solid #CCDAD4;
+    border-radius: 8px;
+}
+
+/* Core Print Typography Rules Forcing True White High-Contrast Outputs */
+.core-clean-pdf-typography {
+    color: #1E293B !important;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.core-clean-pdf-typography p {
+    color: #334155 !important;
+    margin-bottom: 12px;
+}
+
+.contract-heading-inline {
+    font-family: 'Merriweather', Georgia, serif;
+    color: #0A2923 !important;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 28px 0 10px 0;
+    border-bottom: 1px solid #E2E8F0;
+    padding-bottom: 4px;
+}
+
+.contract-bullets-strict {
+    padding-left: 20px;
+    margin-bottom: 16px;
+}
+
+.contract-bullets-strict li {
+    font-size: 12.5px;
+    color: #475569 !important;
+    margin-bottom: 6px;
+}
+
+.legal-date-stamp-row {
+    background: #F8FAFC;
+    padding: 10px 14px;
+    border-left: 3px solid #14B8A6;
+    margin: 16px 0;
+    font-size: 12.5px;
+}
+
+.underline-fill-field {
+    border-bottom: 1px solid #0A2923;
+    color: #0A2923 !important;
+    padding: 0 4px;
+    font-weight: 700;
+}
+
+/* Page Node Wrapper Spacing Controllers */
+.html2pdf-page-wrapper-node {
+    padding: 20px 10px;
+}
+
+.continuous-sig-box-padding {
+    padding-top: 30px;
+}
+
+/* Stamped Signatory Vector Layer Mappings */
+.placeholder-salman-sig-stamped-canvas {
+    height: 60px;
+    /* Uses clean data vector alphas to combine structural signatures and the official seal backdrop seamlessly[cite: 1] */
+    background-image: url('https://i.imgur.com/e2oEdfz.png'), url('https://i.imgur.com/bH05hR1.png');
+    background-size: 55px auto, contain;
+    background-repeat: no-repeat;
+    background-position: bottom right, bottom left;
+    border-bottom: 1px solid #CBD5E1;
+    margin: 8px 0;
+}
+
+.target-blank-sig-box {
+    height: 60px;
+    border-bottom: 1px solid #CBD5E1;
+    margin: 8px 0;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 2px;
+}
+
+.padding-top-modifier-canvas {
+    margin-top: 32px;
+    border-top: 1px solid #E2E8F0;
+    padding-top: 20px;
+}
+
+.text-dark-override-print td {
+    color: #334155 !important;
+}

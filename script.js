@@ -193,7 +193,7 @@ function handleUserAuthentication(event, assignedRole) {
         window.location.href = '/dashboard/hospital-enterprise-core.html';
     } else if (assignedRole === 'doctor') {
         alert("Clinical identity token checked against council keys. Establishing private clinic operational workspace portal...");
-        window.location.href = '/dashboard/provider-core.html';
+        window.location.href = 'doctor-dashboard.html';
     } else {
         alert("Patient credentials mapped successfully. Redirecting to your PulseOne Patient Operations Command...");
         // UPDATED: Routes straight to your new custom patient dashboard
@@ -272,7 +272,7 @@ function updateUploadLabel(inputElement) {
 function finalizePartnerNodeEcosystem(event) {
     event.preventDefault();
     alert("Verification assets parsed and logged across validation pipelines. Instantiating secure client partner control portal panel...");
-    window.location.href = '/dashboard/provider-core.html'; 
+    window.location.href = 'doctor-dashboard.html'; 
 }
 
 /**
