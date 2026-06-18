@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulseOne - Patient Operations Command</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/global-tokens.css">
+    <link rel="stylesheet" href="patient-dashboard.css">
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</head>
+<body class="dashboard-engine-body">
+
+    <div id="notification-synapse-banner" class="notification-toast-alert">
+        <div class="toast-content-pack">
+            <span id="toast-pulse-indicator" class="toast-pulse-node"></span>
+            <p id="notification-toast-text">System Active: PulseOne node loaded successfully.</p>
+        </div>
+        <button class="close-toast-btn" onclick="dismissNotificationBanner()">&times;</button>
+    </div>
+
+    <header class="main-header internal-dashboard-header">
+        <nav class="nav-container">
+            <div class="logo-block" onclick="window.location.href='../index.html'">
+                <img src="../assets/logo.png" width="180" height="45" alt="PulseOne Network"/>
+            </div>
+            <div class="nav-links">
+                <a href="#patient-core-search" class="nav-item">Find Doctors</a>
+                <a href="#registered-providers" class="nav-item">Verified Directory</a>
+                <a href="#royalty-tier-matrix" class="nav-item">Royalty Elite Tier</a>
+            </div>
+            
+            <div class="header-right-action-cluster">
+                <div class="wallet-status-capsule-card" onclick="revealWalletLedgerModal()">
+                    <span class="wallet-icon-ledger">&#128179;</span>
+                    <div class="wallet-meta-numbers">
+                        <span class="wallet-label-caption">PulseWallet Balance</span>
+                        <span id="header-wallet-balance" class="wallet-numerical-value">₹0.00</span>
+                    </div>
+                </div>
+
+                <div class="user-profile-anchor-block">
+                    <button class="doctor-profile-btn" onclick="window.location.href='patient-profile.html'" title="View Patient Profile" style="background: none; border: none; padding: 0; cursor: pointer;">
+                        <div class="profile-avatar-circle">-</div>
+                    </button>
+                    <div class="profile-meta-text">
+                        <span class="user-name-title">Synchronizing Node...</span>
+                        <span id="user-profile-status" class="profile-status-tag">Standard Profile</span>
+                    </div>
+                    <button class="btn-logout-header" style="background-color: #EF4444; color: #FFFFFF; border: none; padding: 8px 16px; font-size: 0.85rem; font-weight: 600; border-radius: 6px; cursor: pointer; margin-left: 8px;" onclick="executePlatformSecureLogout()">Logout</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="dashboard-viewport-frame adaptive-padding-top">
+
+        <section id="patient-core-search" class="dashboard-content-segment">
+            <div class="search-hero-context">
+                <h1 class="serif-dashboard-title">Your Integrated Healthcare Infrastructure.</h1>
+                <p class="search-hero-subtitle">Access clinical routing paths, video synapses, and coordinate treatment options instantaneously.</p>
+            </div>
+
+            <div class="smart-search-infrastructure-bar">
+                <div class="search-location-cell">
+                    <span class="cell-icon-marker">&#128205;</span>
+                    <input type="text" id="geo-location" value="Kanpur" placeholder="Enter City Location...">
+                </div>
+                <div class="search-query-cell">
+                    <span class="cell-icon-marker">&#128269;</span>
+                    <input type="text" id="medical-query" list="diseases" placeholder="Enter disease or specialist..."/>
+                    <datalist id="diseases">
+                        <option value="Fever">
+                        <option value="Cough">
+                        <option value="Cold">
+                        <option value="Pregnancy">
+                        <option value="Diabetes">
+                        <option value="Skin">
+                        <option value="Acne">
+                        <option value="Allergy">
+                        <option value="Headache">
+                    </datalist>
+                </div>
+                <button class="btn-search-trigger" onclick="executeAdvancedFilterSearch()">Find Medical Node</button>
+            </div>
+
+            <div class="advanced-filter-parameter-panel">
+                <div class="filter-dropdown-selector">
+                    <label>Gender</label>
+                    <select id="filter-doctor-gender">
+                        <option value="all">Any Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+
+                <div class="filter-dropdown-selector">
+                    <label>Experience</label>
+                    <select id="filter-experience">
+                        <option value="all">Any Experience</option>
+                        <option value="5">5+ Years</option>
+                        <option value="10">10+ Years</option>
+                        <option value="15">15+ Years</option>
+                    </select>
+                </div>
+
+                <div class="filter-dropdown-selector">
+                    <label>Consultation Fee</label>
+                    <select id="filter-fees">
+                        <option value="all">Any Fee</option>
+                        <option value="500">Below ₹500</option>
+                        <option value="1000">Below ₹1000</option>
+                        <option value="1500">Below ₹1500</option>
+                    </select>
+                </div>
+
+                <div class="filter-dropdown-selector">
+                    <label>Rating</label>
+                    <select id="filter-rating">
+                        <option value="all">All Ratings</option>
+                        <option value="4">4+ Rating</option>
+                        <option value="4.5">4.5+ Rating</option>
+                    </select>
+                </div>
+
+                <div class="filter-dropdown-selector">
+                    <label>Consultation Type</label>
+                    <select id="filter-mode">
+                        <option value="all">All</option>
+                        <option value="clinic">In Clinic</option>
+                        <option value="video">Video Consult</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <section id="doctor-search-results" class="dashboard-content-segment">
+            <div class="section-header-left-aligned">
+                <h2>Dynamic Filter Search Results</h2>
+                <p>Matching health nodes localized from your cluster queries.</p>
+            </div>
+            <div id="doctor-results-grid" class="live-incoming-quotes-matrix"></div>
+        </section>
+
+        <section id="registered-providers" class="dashboard-content-segment grid-divider-top">
+            <div class="section-header-left-aligned">
+                <span class="pill-badge">PulseOne Aligned Network</span>
+                <h2>Verified General Practitioner Directory</h2>
+                <p>Select an established partner directly for fixed-fee consultations, test evaluations, or treatment paths.</p>
+            </div>
+            <div id="doctors-directory-target-grid" class="live-incoming-quotes-matrix"></div>
+        </section>
+
+        <div id="appointment-calendar-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15, 32, 28, 0.45); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); justify-content:center; align-items:center; z-index:9999; transition: all 0.3s ease;">
+            <div style="background:#ffffff; padding:32px; border-radius:20px; width:100%; max-width:440px; box-shadow:0 24px 48px rgba(10, 41, 35, 0.12); border: 1px solid rgba(204, 218, 212, 0.5); transform: translateY(0); transition: transform 0.3s ease;">
+                
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; border-bottom:1px solid #E6EEEA; padding-bottom:16px;">
+                    <div>
+                        <h3 style="font-family:'Plus Jakarta Sans', sans-serif; font-size:1.25rem; color:#0A2923; font-weight:700; margin:0;">Schedule Appointment</h3>
+                        <p style="font-family:'Plus Jakarta Sans', sans-serif; font-size:0.8rem; color:#64748b; margin:4px 0 0 0;">Select your clinical slot timing parameters</p>
+                    </div>
+                    <button type="button" onclick="closeAppointmentCalendarModal()" style="background:none; border:none; font-size:20px; color:#94a3b8; cursor:pointer; padding:4px; line-height:1; transition:color 0.2s;" onmouseover="this.style.color='#EF4444'" onmouseout="this.style.color='#94a3b8'">&times;</button>
+                </div>
+
+                <form onsubmit="submitAppointmentBookingRequest(event)" style="display:flex; flex-direction:column; gap:18px;">
+                    <div class="input-form-group" style="display:flex; flex-direction:column; gap:6px;">
+                        <label style="font-family:'Plus Jakarta Sans', sans-serif; font-size:11px; font-weight:700; color:#0A2923; text-transform:uppercase; letter-spacing:0.5px;">Appointment Date</label>
+                        <div style="position:relative; display:flex; align-items:center;">
+                            <input type="date" id="booking-target-date" required style="width:100%; padding:12px 14px; border:1px solid #CCDAD4; border-radius:10px; font-family:'Plus Jakarta Sans', sans-serif; font-size:14px; color:#0A2923; outline:none; background:#FAFCFB; transition:border-color 0.2s;" onfocus="this.style.borderColor='#154D3F'">
+                        </div>
+                    </div>
+
+                    <div class="input-form-group" style="display:flex; flex-direction:column; gap:6px;">
+                        <label style="font-family:'Plus Jakarta Sans', sans-serif; font-size:11px; font-weight:700; color:#0A2923; text-transform:uppercase; letter-spacing:0.5px;">Preferred Time Slot</label>
+                        <select id="booking-target-time" required style="width:100%; padding:12px 14px; border:1px solid #CCDAD4; border-radius:10px; font-family:'Plus Jakarta Sans', sans-serif; font-size:14px; color:#0A2923; outline:none; background:#FAFCFB; cursor:pointer; transition:border-color 0.2s;" onfocus="this.style.borderColor='#154D3F'">
+                            <option value="09:00 AM" data-hour="9">09:00 AM - Morning Session</option>
+                            <option value="11:30 AM" data-hour="11">11:30 AM - Midday Session</option>
+                            <option value="02:30 PM" data-hour="14">02:30 PM - Afternoon Session</option>
+                            <option value="05:00 PM" data-hour="17">05:00 PM - Evening Session</option>
+                        </select>
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:10px; margin-top:12px;">
+                        <button type="submit" style="width:100%; background:#0A2923; color:#ffffff; border:none; padding:14px; border-radius:10px; font-family:'Plus Jakarta Sans', sans-serif; font-weight:600; font-size:14px; cursor:pointer; transition:all 0.2s; box-shadow:0 4px 12px rgba(10, 41, 35, 0.15);" onmouseover="this.style.background='#154D3F'" onmouseout="this.style.background='#0A2923'">
+                            Confirm Consultation Booking
+                        </button>
+                        <button type="button" onclick="closeAppointmentCalendarModal()" style="width:100%; background:transparent; color:#64748b; border:1px solid #CCDAD4; padding:12px; border-radius:10px; font-family:'Plus Jakarta Sans', sans-serif; font-weight:600; font-size:13px; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.background='#F4F8F6'; this.style.color='#0A2923';" onmouseout="this.style.background='transparent'; this.style.color='#64748b';">
+                            Cancel Request
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <section id="royalty-tier-matrix" class="dashboard-content-segment royalty-checkout-dashboard-canvas grid-divider-top">
+            <div class="section-header-centered">
+                <div class="pill-badge-mini">Elite Household Protection Tiers</div>
+                <h2 class="serif-title-section-centered">PulseOne Royalty Membership Ecosystem</h2>
+                <p class="section-desc-centered">Unlock administrative priority nodes, continuous medical loop allocations, and pre-loaded wallet parameter injections immediately.</p>
+            </div>
+
+            <div class="royalty-pricing-matrix-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; max-width: 900px; margin: 40px auto 0 auto;">
+                <div class="pricing-card-structure hot-tier">
+                    <div class="card-tier-header">
+                        <span class="tier-badge-label">Most Chosen Core</span>
+                        <h4>Royalty Family Tier</h4>
+                        <p>Complete lifecycle continuity for household networks.</p>
+                    </div>
+                    <div class="tier-pricing-display">
+                        <span class="price-currency">₹</span>
+                        <span class="price-value">4,999</span>
+                        <span class="price-tenure">/ Annual Registry</span>
+                    </div>
+                    <ul class="tier-perks-checklist" style="list-style: none;">
+                        <li><span>✔</span> Complete execution loops for up to 4 dependents</li>
+                        <li><span>✔</span> Fully loads wallet with ₹1,500 active treatment credits immediately</li>
+                        <li><span>✔</span> Zero platform clinical triage setup fee parameters</li>
+                        <li><span>✔</span> Priority 1-click telemetry sync with emergency networks</li>
+                    </ul>
+                    <button class="btn-purchase-tier-trigger" onclick="initializeRoyaltyPurchase('Family Tier', 4999, 1500)">Purchase Family Tier Link &rarr;</button>
+                </div>
+
+                <div class="pricing-card-structure complex-tier">
+                    <div class="card-tier-header">
+                        <span class="tier-badge-label" style="background:#334155; color:#fff;">Enterprise Core</span>
+                        <h4>Royalty Corporate Core</h4>
+                        <p>Dedicated tracking slots for business execution systems.</p>
+                    </div>
+                    <div class="tier-pricing-display">
+                        <span class="price-currency">₹</span>
+                        <span class="price-value">14,999</span>
+                        <span class="price-tenure">/ Corporate Block</span>
+                    </div>
+                    <ul class="tier-perks-checklist" style="list-style: none;">
+                        <li><span>✔</span> Covers complete operations teams up to 15 nodes</li>
+                        <li><span>✔</span> Fully loads wallet with ₹5,000 active corporate credits immediately</li>
+                        <li><span>✔</span> Full-access pipeline passes for executive medical panels</li>
+                        <li><span>✔</span> Continuous post-discharge tracking validation tracking logs</li>
+                    </ul>
+                    <button class="btn-purchase-tier-trigger" style="background-color: #334155;" onclick="initializeRoyaltyPurchase('Corporate Core', 14999, 5000)">Purchase Corporate Link &rarr;</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="app-footer" style="background-color: #061714; padding: 60px 10% 40px 10%; color: #ffffff;">
+        <div class="footer-primary-layout">
+            <div class="footer-branding-cell">
+                <div class="logo-block-footer" style="margin-bottom: 12px;">
+                     <img src="../assets/logo.png" width="180" height="45" alt="PulseOne Logo"/>
+                </div>
+                <p class="footer-mission-text" style="font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; max-width: 450px;">Structured healthcare infrastructure designed to connect hospitals, patients, and diagnostics into one seamless system.</p>
+            </div>
+        </div>
+        <div class="footer-bottom-bar" style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; margin-top: 20px; font-size: 13px; color: rgba(255,255,255,0.4);">
+            <span>&copy; 2026 PulseOne Infrastructure. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <div id="royalty-checkout-modal" class="modal-blur-overlay">
+        <div class="modal-surface-container">
+            <div class="modal-header-row">
+                <h3 id="checkout-tier-title">Initialize Royalty Stream Execution</h3>
+                <button class="close-modal-trigger" onclick="closeCheckoutModal()">&times;</button>
+            </div>
+            <div class="modal-body-content">
+                <div class="checkout-financial-summary-card" style="background:#f8fafc; padding:20px; border-radius:12px; margin-bottom:20px; border:1px solid #e2e8f0;">
+                    <span style="font-size: 0.8rem; color:#64748b;">Platform Service Allocation Token ID: <strong id="token-mock-id">P1-ROY-XXXX</strong></span>
+                    <h3 style="margin-top:8px; font-size:1.4rem; color:#0A2923;">Total Payable Amount: <span id="checkout-total-price">₹0</span></h3>
+                </div>
+                <form onsubmit="processRoyaltyPaymentTransaction(event)">
+                    <div class="input-form-group" style="display:flex; flex-direction:column; gap:6px; margin-bottom:16px;">
+                        <label style="font-size:0.75rem; text-transform:uppercase; font-weight:700; color:#64748b;">Holder Legal Name</label>
+                        <input type="text" id="checkout-holder-name" value="" required style="padding:12px; border:1px solid #e2e8f0; border-radius:8px;">
+                    </div>
+                    <div class="input-form-group" style="display:flex; flex-direction:column; gap:6px; margin-bottom:20px;">
+                        <label style="font-size:0.75rem; text-transform:uppercase; font-weight:700; color:#64748b;">Secure UPI Reference ID / Card Number</label>
+                        <input type="text" placeholder="name@upi or 4111 •••• •••• ••••" required style="padding:12px; border:1px solid #e2e8f0; border-radius:8px;">
+                    </div>
+                    <button type="submit" class="btn-primary full-width-modifier" style="background-color: #16a34a; color:#fff; padding:14px; border:none; border-radius:8px; font-weight:600; width:100%; cursor:pointer;">Confirm Payment & Activate Tier</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="wallet-ledger-modal" class="modal-blur-overlay">
+        <div class="modal-surface-container">
+            <div class="modal-header-row">
+                <h3>PulseWallet Balance Node</h3>
+                <button class="close-modal-trigger" onclick="closeWalletLedgerModal()">&times;</button>
+            </div>
+            <div class="modal-body-content">
+                <div class="wallet-balance-hero-block-inside" style="background:#f8fafc; padding:24px; border-radius:12px; text-align:center; margin-bottom:20px; border:1px solid #e2e8f0;">
+                    <p style="font-size:0.8rem; text-transform:uppercase; color:#64748b; font-weight:700;">Current Active System Balance</p>
+                    <h2 id="modal-wallet-balance-display" style="font-size:2.2rem; color:#0A2923; margin-top:6px;">₹0.00</h2>
+                </div>
+                <div class="wallet-action-group-buttons">
+                    <div class="input-form-group" style="display:flex; flex-direction:column; gap:6px; margin-bottom:16px;">
+                        <label style="font-size:0.75rem; text-transform:uppercase; font-weight:700; color:#64748b;">Recharge Token Credits (INR)</label>
+                        <input type="number" id="wallet-recharge-amount" placeholder="₹1,000" min="100" style="padding:12px; border:1px solid #e2e8f0; border-radius:8px;">
+                    </div>
+                    <button class="btn-primary full-width-modifier" style="background-color:#0A2923; color:#fff; padding:14px; border:none; border-radius:8px; font-weight:600; width:100%; cursor:pointer;" onclick="executeWalletRechargeDirect()">Instantly Refill Wallet Balance</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="patient-script.js"></script>
+</body>
+</html>

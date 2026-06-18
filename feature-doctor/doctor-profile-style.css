@@ -1,0 +1,412 @@
+/* ==========================================================================
+   PULSEONE GREEN PROFILE SYSTEM - STABLE MATRICES HIGH-REALS MODEL
+   ========================================================================== */
+
+:root {
+    --primary: #16a34a;
+    --primary-light: #dcfce7;
+    --secondary: #22c55e;
+    --bg: #f4f8fb;
+    --white: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 8px 30px rgba(0,0,0,0.08);
+    --radius: 18px;
+    
+    /* Global Corporate Layout Elements */
+    --clr-navy: #0A2923;
+    --clr-stark-white: #ffffff;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-sans);
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    padding: 30px 0 0 0; /* Base layout padding adjustments */
+}
+
+/* ==========================================================================
+   MAIN CONTAINER BOUNDS
+   ========================================================================== */
+.profile-page-container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* ==========================================================================
+   PROFILE HEADER BLOCK MATRICES
+   ========================================================================== */
+.profile-header-card {
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    padding: 30px;
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.doctor-profile-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.doctor-profile-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--primary-light);
+}
+
+/* FIXED ALIGNED GREEN BUTTON ARRAYS */
+.btn-upload-photo {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: opacity 0.2s ease;
+}
+
+.btn-upload-photo:hover {
+    opacity: 0.92;
+}
+
+.doctor-profile-center {
+    flex: 1;
+}
+
+.doctor-profile-center h1 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    color: var(--text);
+    font-weight: 700;
+}
+
+.doctor-speciality {
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+}
+
+.doctor-badges {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.badge {
+    padding: 8px 14px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.badge.verified {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge.premium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.doctor-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.doctor-meta-grid div {
+    background: #f8fafc;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+
+.doctor-meta-grid label {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.doctor-meta-grid p {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* FIXED ALIGNED VERTICAL SUBMIT NAVIGATION STACKS */
+.doctor-profile-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 200px;
+    flex-shrink: 0;
+}
+
+.doctor-profile-right button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+.doctor-profile-right button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.2);
+}
+
+/* ==========================================================================
+   SECTIONS & INNER GRIDS CARDS
+   ========================================================================== */
+.profile-section {
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    padding: 30px;
+    width: 100%;
+}
+
+.profile-section h2 {
+    margin-bottom: 25px;
+    color: var(--text);
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    background-color: var(--white);
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+    border-color: var(--primary);
+}
+
+.input-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+/* ==========================================================================
+   TABULAR DOCUMENT CONFIGURATIONS & STATS TICKERS
+   ========================================================================== */
+.documents-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.documents-table th {
+    background: #f8fafc;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-weight: 700;
+    color: var(--text);
+    font-size: 14px;
+}
+
+.documents-table td {
+    padding: 15px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text);
+}
+
+.documents-table button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 8px;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.association-card {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.association-card h3 { margin-bottom: 8px; font-size: 16px; font-weight: 700; }
+.association-card p { color: var(--muted); margin-bottom: 12px; font-size: 14px; }
+.association-card button { background: var(--primary); color: white; border: none; padding: 10px 18px; border-radius: 10px; cursor: pointer; font-weight: 600; }
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.stat-card {
+    background: #f8fafc;
+    border-radius: 18px;
+    padding: 25px;
+    text-align: center;
+    border: 1px solid var(--border);
+}
+
+.stat-card h3 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.stat-card p {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.security-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.security-actions button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* ==========================================================================
+   ADDED: PULSEONE SYSTEM DESIGN SYSTEM FOOTER LAYOUT
+   ========================================================================== */
+.app-footer {
+    background-color: #061714;
+    padding: 60px 10% 40px 10%;
+    color: var(--clr-stark-white);
+    width: 100%;
+    margin-top: 40px; /* Spacer pushing footer clean down viewport */
+}
+
+.footer-primary-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.logo-block-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.footer-mission-text {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    max-width: 450px;
+    line-height: 1.6;
+}
+
+.footer-bottom-bar {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 20px;
+    margin-top: 20px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+}
+
+/* ==========================================================================
+   RESPONSIVE MEDIA CONTROLS
+   ========================================================================== */
+button { transition: .3s; }
+button:hover { opacity: .92; }
+button:active { transform: scale(.98); }
+
+@media(max-width:1200px){
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media(max-width:900px){
+    .profile-header-card { flex-direction: column; align-items: center; }
+    .doctor-profile-center, .doctor-profile-right { width: 100%; }
+    .info-grid, .doctor-meta-grid { grid-template-columns: 1fr; }
+}
+
+@media(max-width:600px){
+    .profile-page-container { padding: 15px; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .documents-table { display: block; overflow-x: auto; }
+    .doctor-profile-image { width: 140px; height: 140px; }
+    .doctor-profile-center h1 { font-size: 1.6rem; }
+}

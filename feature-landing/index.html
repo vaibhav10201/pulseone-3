@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+     <!-- Inject inside feature-landing/index.html <head> layer -->
+<script>
+    (function checkLandingRedirectGuard() {
+        const activeToken = localStorage.getItem('pulseone_user_token');
+        const assignedRole = localStorage.getItem('pulseone_user_role');
+        
+        if (activeToken && assignedRole) {
+            if (assignedRole === 'doctor') {
+                window.location.href = '../feature-doctor/doctor-dashboard.html';
+            } else if (assignedRole === 'patient') {
+                window.location.href = '../feature-patient/patient-dashboard.html';
+            }
+        }
+    })();
+</script>
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulseOne - Structured Healthcare Platform</title>
+    <!-- Font Pre-fetching -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Style Sheet Link -->
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="../css/global-tokens.css">
+</head>
+<body>
+
+    <!-- Floating Top Navigation Header Bar -->
+    <header class="main-header">
+        <nav class="nav-container">
+            <div class="logo-block" onclick="navigateTo('home')">
+                <img src="../assets/logo.png" width="200" height="50" alt="PulseOne Logo"/>
+            </div>
+            <div class="nav-links">
+                <a href="#about" class="nav-item" onclick="navigateTo('about')">About Us</a>
+                <a href="#solutions" class="nav-item" onclick="navigateTo('solutions')">Solutions</a>
+                <a href="#medical-access" class="nav-item" onclick="navigateTo('medical')">Medical Access Support</a>
+                <a href="#royalty" class="nav-item" onclick="navigateTo('royalty')">Royalty Program</a>
+            </div>
+            <!-- REMOVED: Submit Inquiry | ADDED: Explicit Routing Action Cluster -->
+            <div class="auth-action-group">
+                <button class="btn-login-ghost" onclick="window.location.href='../feature-auth/auth.html'">Login</button>
+                <button class="btn-signup" onclick="window.location.href='../feature-auth/auth.html'">Sign Up</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Dynamic Frame -->
+    <main id="app-viewport">
+        
+        <!-- PAGE VIEW: HOME -->
+        <section id="view-home" class="page-view dynamic-active">
+            <!-- Hero Composite Banner -->
+            <div class="hero-block">
+                <div class="hero-backdrop-overlay"></div>
+                <div class="hero-content">
+                    <div class="pill-badge">Structured Healthcare Platform</div>
+                    <h1 class="serif-title-hero">Structured Healthcare.<br>Seamless Access.<br><span class="highlight-green">Stronger Continuity.</span></h1>
+                    <p class="hero-description">PulseOne connects hospitals, families, and diagnostics into one coordinated healthcare system.</p>
+                    
+                    <div class="hero-action-row">
+                        <!-- Redirecting to Authentication/Onboarding Funnel Page -->
+                        <button class="btn-primary" onclick="window.location.href='auth.html'">Book Appointment</button>
+                        <button class="btn-secondary" onclick="window.location.href='auth.html'">Partner With PulseOne</button>
+                    </div>
+
+                    <div class="telemetry-row">
+                        <div class="glass-card-telemetry">
+                            <div class="telemetry-icon-box">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 21v-4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4M7 7h2M7 11h2M15 7h2M15 11h2"/></svg>
+                            </div>
+                            <div>
+                                <h3>50+</h3>
+                                <p>Hospitals</p>
+                            </div>
+                        </div>
+                        <div class="glass-card-telemetry">
+                            <div class="telemetry-icon-box">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            </div>
+                            <div>
+                                <h3>2K+</h3>
+                                <p>Doctors</p>
+                            </div>
+                        </div>
+                        <div class="glass-card-telemetry">
+                            <div class="telemetry-icon-box">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+                            </div>
+                            <div>
+                                <h3>50K+</h3>
+                                <p>Patients</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segment: Infrastructure Buildout Base -->
+            <div class="content-section-light balance-layout">
+                <div class="text-side-column">
+                    <div class="pill-badge-mini">What is PulseOne</div>
+                    <h2 class="serif-title-section">Building the Infrastructure of Modern Healthcare</h2>
+                    <p class="section-paragraph-lead">PulseOne is a structured healthcare platform designed to connect hospitals, families, and diagnostics into one seamless ecosystem.</p>
+                    
+                    <div class="vertical-feature-stack">
+                        <div class="feature-strip-card">
+                            <div class="strip-icon green-tint">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#46E483" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                            </div>
+                            <div>
+                                <h4>Hospital Growth Engine</h4>
+                                <p>Structured patient acquisition & retention systems</p>
+                            </div>
+                        </div>
+                        <div class="feature-strip-card">
+                            <div class="strip-icon green-tint">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#46E483" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+                            </div>
+                            <div>
+                                <h4>Patient Access Network</h4>
+                                <p>Organized healthcare access with membership benefits</p>
+                            </div>
+                        </div>
+                        <div class="feature-strip-card">
+                            <div class="strip-icon green-tint">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#46E483" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                            </div>
+                            <div>
+                                <h4>Integrated Care System</h4>
+                                <p>Diagnostics, treatment coordination & financial support</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attribution-note">Built and operated by <strong>Zeencare Health Pvt. Ltd.</strong></div>
+                </div>
+                <div class="graphic-side-column">
+                    <div class="asymmetric-image-wrapper">
+                        <div class="green-backing-canvas"></div>
+                        <div class="image-mock-placeholder">
+                            <div class="inner-image-overlay"></div>
+                            <div class="floating-image-label-card">
+                                <h5>Integrated Care</h5>
+                                <p>Diagnostics, treatment & support in one system</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segment: Three Pillars -->
+            <div class="content-section-muted">
+                <div class="section-header-centered">
+                    <div class="pill-badge-mini">Core Offerings</div>
+                    <h2 class="serif-title-section-centered">Three Pillars of PulseOne</h2>
+                    <p class="section-desc-centered">Designed to create structured, scalable, and seamless healthcare experiences across hospitals and families.</p>
+                </div>
+                <div class="three-cards-grid">
+                    <div class="pillar-card">
+                        <div class="pillar-icon-box">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#46E483" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <h3>Patient Acquisition & Retention</h3>
+                        <p>Convert one-time visits into long-term relationships with structured patient onboarding and engagement systems.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-icon-box">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#46E483" stroke-width="2"><path d="M20 7h-9M14 3v8M19 17h-5M11 13v8M5 10l-3 3 3 3M22 10l-3 3 3 3"/></svg>
+                        </div>
+                        <h3>Royalty Membership Program</h3>
+                        <p>A premium healthcare membership offering continuity, priority access, and integrated care benefits for families.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-icon-box">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#46E483" stroke-width="2"><path d="M4 4h16v16H4zM4 12h16M12 4v16"/></svg>
+                        </div>
+                        <h3>Coordinated Care Network</h3>
+                        <p>Seamless integration of diagnostics, consultations, and treatment pathways into one connected ecosystem.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segment: Stakeholders Context -->
+            <div class="content-section-dark-bg">
+                <div class="dark-section-overlay"></div>
+                <div class="dark-section-inner">
+                    <div class="pill-badge-mini-dark">For Who We Build</div>
+                    <h2 class="serif-title-section-white">Designed for Every Stakeholder</h2>
+                    <p class="section-paragraph-lead-muted">PulseOne creates value across the healthcare ecosystem — from hospitals to families to strategic partners.</p>
+                    
+                    <div class="three-cards-grid-dark">
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-icon-box">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#46E483" stroke-width="2"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/></svg>
+                            </div>
+                            <h3>For Hospitals</h3>
+                            <p>Structured patient inflow, membership-driven retention, and lifecycle engagement systems.</p>
+                            <button class="btn-card-action" onclick="window.location.href='auth.html'">Explore Hospital Partnership &rarr;</button>
+                        </div>
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-icon-box">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#46E483" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+                            </div>
+                            <h3>For Patients & Families</h3>
+                            <p>Organized healthcare access, diagnostics, appointments, and support in one unified platform.</p>
+                            <button class="btn-card-action" onclick="window.location.href='auth.html'">Join Royalty Membership &rarr;</button>
+                        </div>
+                        <div class="stakeholder-card">
+                            <div class="stakeholder-icon-box">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#46E483" stroke-width="2"><path d="M16 16v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v1"/></svg>
+                            </div>
+                            <h3>For Strategic Partners</h3>
+                            <p>Collaborate to strengthen India's healthcare delivery ecosystem through shared infrastructure.</p>
+                            <button class="btn-card-action" onclick="window.location.href='auth.html'">Partner With PulseOne &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segment: Interactive Timeline Map -->
+            <div class="content-section-light">
+                <div class="section-header-centered">
+                    <div class="pill-badge-mini">How It Works</div>
+                    <h2 class="serif-title-section-centered">The PulseOne Journey</h2>
+                </div>
+                
+                <div class="timeline-container">
+                    <div class="timeline-backbone"></div>
+                    
+                    <div class="timeline-node lay-left">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <span class="step-num">01 — System Integration</span>
+                            <p>Hospitals integrate with PulseOne's structured acquisition and membership system.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-node lay-right">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <span class="step-num">02 — Patient Engagement</span>
+                            <p>Patients enroll, book appointments, access diagnostics, and receive coordinated care support.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-node lay-left">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <span class="step-num">03 — Continuity & Care</span>
+                            <p>Continuous monitoring, lifecycle management, and systematic treatment execution maps.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segment: Future Horizon Callout Conversion Box -->
+            <div class="content-section-light no-top-padding">
+                <div class="callout-card-green-gradient">
+                    <h2 class="serif-title-callout">Ready to Build the Future of Healthcare?</h2>
+                    <p class="callout-desc">Join PulseOne and become part of a structured ecosystem redefining modern medical delivery.</p>
+                    <div class="callout-btn-row">
+                        <button class="btn-callout-primary" onclick="window.location.href='auth.html'">Contact Partnership Team &rarr;</button>
+                        <button class="btn-callout-secondary" onclick="window.location.href='auth.html'">View Case Studies</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE VIEW: ABOUT US -->
+        <section id="view-about" class="page-view">
+            <div class="content-section-light balance-layout adaptive-padding-top">
+                <div class="text-side-column">
+                    <div class="pill-badge-mini">Why PulseOne</div>
+                    <h2 class="serif-title-section">Built for the Future of Healthcare Delivery</h2>
+                    <p class="section-paragraph-lead">PulseOne is not just a healthcare solution — it is a structured infrastructure designed to scale modern medical systems.</p>
+                </div>
+                <div class="graphic-side-column">
+                    <div class="about-grid-metrics">
+                        <div class="metric-block-dark">
+                            <h5>Lifecycle Focused</h5>
+                            <p>Not just visits — long-term patient engagement</p>
+                        </div>
+                        <div class="metric-block-light">
+                            <h5>Built for Growth Hospitals</h5>
+                            <p>Optimized for mid-sized & expanding healthcare systems</p>
+                        </div>
+                        <div class="metric-block-light">
+                            <h5>Membership Continuity</h5>
+                            <p>Structured retention through membership-driven care</p>
+                        </div>
+                        <div class="metric-block-light">
+                            <h5>Diagnostics Integration</h5>
+                            <p>Seamless connection across diagnostics network</p>
+                        </div>
+                        <div class="metric-block-light">
+                            <h5>Financial Access Support</h5>
+                            <p>Structured assistance for treatment affordability</p>
+                        </div>
+                        <div class="metric-block-light">
+                            <h5>Scalable Infrastructure</h5>
+                            <p>Designed for long-term healthcare expansion</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE VIEW: SOLUTIONS -->
+        <section id="view-solutions" class="page-view">
+            <div class="content-section-muted adaptive-padding-top">
+                <div class="section-header-centered">
+                    <div class="pill-badge-mini">Core Framework</div>
+                    <h2 class="serif-title-section-centered">Engineered Enterprise Solutions</h2>
+                </div>
+                <div class="three-cards-grid">
+                    <div class="pillar-card">
+                        <h3>Dynamic Routing Engine</h3>
+                        <p>Automated clinical triage mapping patients directly to the optimal specialist facility instantaneously.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <h3>Telemetry Synapse</h3>
+                        <p>Real-time pipeline passing diagnostics telemetry securely between laboratory hubs and operating rooms.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <h3>Continuity Suite</h3>
+                        <p>Algorithmic post-discharge monitoring keeping families updated and healthcare teams in absolute alignment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE VIEW: MEDICAL ACCESS SUPPORT -->
+        <section id="view-medical" class="page-view">
+            <div class="content-section-light balance-layout adaptive-padding-top">
+                <div class="text-side-column">
+                    <div class="pill-badge-mini">Advanced Care Access</div>
+                    <h2 class="serif-title-section">Planning a Surgery or Advanced Treatment?</h2>
+                    <p class="section-paragraph-lead">PulseOne simplifies complex healthcare journeys by connecting you with the right specialists, diagnostics, and care pathways.</p>
+                    <ul class="checklist-suite">
+                        <li><span class="check-bullet">&checkmark;</span> Specialist discovery</li>
+                        <li><span class="check-bullet">&checkmark;</span> Pre-surgery diagnostic coordination</li>
+                        <li><span class="check-bullet">&checkmark;</span> Appointment scheduling</li>
+                        <li><span class="check-bullet">&checkmark;</span> Treatment pathway guidance</li>
+                        <li><span class="check-bullet">&checkmark;</span> Structured financial access assistance</li>
+                    </ul>
+                    <button class="btn-dark-hero" onclick="window.location.href='auth.html'">Request Surgery Consultation &rarr;</button>
+                </div>
+                <div class="graphic-side-column flex-center">
+                    <div class="dark-box-card">
+                        <div class="pill-badge-mini-dark-static">Care Infrastructure</div>
+                        <h3>End-to-End Support</h3>
+                        <p>From diagnosis to recovery, PulseOne ensures a seamless, structured, and guided treatment journey.</p>
+                        <div class="inner-highlight-banner">
+                            Trusted across metro & emerging healthcare corridors
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE VIEW: ROYALTY PROGRAM -->
+        <section id="view-royalty" class="page-view">
+            <div class="content-section-muted adaptive-padding-top">
+                <div class="section-header-centered">
+                    <div class="pill-badge-mini">Elite Tier</div>
+                    <h2 class="serif-title-section-centered">Royalty Membership Ecosystem</h2>
+                    <p class="section-desc-centered">Unlocking absolute administrative priority and premium specialized health delivery pathways for your entire household ecosystem.</p>
+                </div>
+                <div class="three-cards-grid">
+                    <div class="pillar-card hot-tier">
+                        <h3>Family Tier</h3>
+                        <p>Covers up to 4 dependents with absolute continuous coordination loops.</p>
+                    </div>
+                    <div class="pillar-card complex-tier">
+                        <h3>Corporate Core</h3>
+                        <p>Dedicated clinical infrastructure links for specialized business teams.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Global Application Footer Structure -->
+    <footer class="app-footer">
+        <div class="footer-primary-layout">
+            <div class="footer-branding-cell">
+                <div class="logo-block-footer">
+                     <img src="../assets/logo.png" width="200" height="50" alt="PulseOne Logo"/>
+                </div>
+                <p class="footer-mission-text">Structured healthcare infrastructure designed to connect hospitals, patients, and diagnostics into one seamless system.</p>
+                <div class="social-icon-row">
+                    <div class="icon-circle-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </div>
+                    <div class="icon-circle-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-links-column">
+                <h4>Company</h4>
+                <a href="#about" onclick="navigateTo('about')">About Us</a>
+                <a href="#contact" onclick="window.location.href='auth.html'">Contact</a>
+            </div>
+            <div class="footer-links-column">
+                <h4>Solutions</h4>
+                <a href="#solutions" onclick="navigateTo('solutions')">For Providers</a>
+                <a href="#solutions" onclick="navigateTo('solutions')">For Patients</a>
+                <a href="#medical" onclick="navigateTo('medical')">Medical Access</a>
+            </div>
+            <div class="footer-links-column">
+                <h4>Programs</h4>
+                <a href="#royalty" onclick="navigateTo('royalty')">Royalty Membership</a>
+                <a href="#partner" onclick="window.location.href='auth.html'">Partner With Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom-bar">
+            <span>&copy; 2026 PulseOne Infrastructure. All rights reserved.</span>
+            <div class="compliance-tokens">
+                <span>ISO Certified</span>
+                <span>Secure Healthcare Systems</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script Block -->
+    <script src="../core-shared-js/script.js"></script>
+</body>
+</html>

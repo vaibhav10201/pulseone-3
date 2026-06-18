@@ -1,0 +1,415 @@
+/* ==========================================================================
+   PULSEONE SYSTEM DESIGN TOKENS & PROFILE MATRIX
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background: #f4f8f6;
+    color: #1b2d2a;
+    line-height: 1.6;
+    padding: 0 10px;
+}
+
+.profile-page-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 40px auto;
+}
+
+/* ==========================================================================
+   HEADER SUMMARY COMPONENT
+   ========================================================================== */
+
+.profile-header-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 35px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* --- LEFT COLUMN --- */
+.patient-profile-left {
+    width: 220px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.patient-profile-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 6px solid #46E483;
+    box-shadow: 0 4px 15px rgba(70, 228, 131, 0.15);
+}
+
+.btn-upload-photo {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #0A2923;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-upload-photo:hover {
+    background: #12473D;
+    transform: translateY(-1px);
+}
+
+/* --- CENTER COLUMN --- */
+.patient-profile-center {
+    flex: 1;
+}
+
+.patient-profile-center h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #0A2923;
+    letter-spacing: -0.5px;
+}
+
+.patient-id {
+    font-size: 14px;
+    color: #667572;
+    font-weight: 500;
+    margin-bottom: 18px;
+}
+
+.patient-badges {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+}
+
+.badge.verified {
+    background: #dff7e8;
+    color: #16833c;
+}
+
+.badge.royalty {
+    background: #fff3d2;
+    color: #d68a00;
+}
+
+/* --- METADATA GRID --- */
+.patient-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
+    background: #f8faf9;
+    padding: 20px;
+    border-radius: 14px;
+    border: 1px solid #e8efec;
+}
+
+.patient-meta-grid div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.patient-meta-grid label {
+    font-size: 12px;
+    color: #7a8b88;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.patient-meta-grid p {
+    font-weight: 600;
+    font-size: 16px;
+    color: #0A2923;
+}
+
+/* --- RIGHT COLUMN BUTTON PANELS --- */
+.patient-profile-right {
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.patient-profile-right button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: #46E483;
+    color: #0A2923;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.patient-profile-right button:hover {
+    transform: translateY(-2px);
+    background: #32d76c;
+    box-shadow: 0 4px 12px rgba(50, 215, 108, 0.2);
+}
+
+/* ==========================================================================
+   CORE CONTENT BLOCK WRAPPERS
+   ========================================================================== */
+
+.profile-section {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    border: 1px solid #e8efec;
+}
+
+.profile-section h2 {
+    color: #0A2923;
+    margin-bottom: 25px;
+    font-size: 22px;
+    font-weight: 700;
+    border-left: 5px solid #46E483;
+    padding-left: 15px;
+    letter-spacing: -0.3px;
+}
+
+/* ==========================================================================
+   INPUT FORM LAYOUTS
+   ========================================================================== */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 14px;
+    color: #667572;
+    font-weight: 600;
+}
+
+.input-group input,
+.input-group textarea,
+.input-group select {
+    padding: 14px;
+    border: 1px solid #d9e3df;
+    border-radius: 10px;
+    outline: none;
+    font-size: 14px;
+    color: #1b2d2a;
+    background: #ffffff;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
+    border-color: #46E483;
+    box-shadow: 0 0 0 3px rgba(70, 228, 131, 0.1);
+}
+
+.input-group textarea {
+    resize: none;
+    min-height: 100px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+/* ==========================================================================
+   PREMIUM ROYALTY CARD INFRASTRUCTURE
+   ========================================================================== */
+
+.royalty-card {
+    background: linear-gradient(135deg, #0A2923, #12473D);
+    color: #ffffff;
+    padding: 35px;
+    border-radius: 18px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(10, 41, 35, 0.15);
+}
+
+/* Decorative backdrop synapse pattern elements */
+.royalty-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 300px;
+    height: 300px;
+    background: rgba(70, 228, 131, 0.04);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.royalty-card h3 {
+    margin-bottom: 8px;
+    color: #46E483;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.royalty-card p {
+    color: #e2e8f0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   PRODUCTION DATA TABLES
+   ========================================================================== */
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid #e8efec;
+}
+
+.history-table thead {
+    background: #0A2923;
+    color: #ffffff;
+}
+
+.history-table th {
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.history-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #e8efec;
+    font-size: 14px;
+    color: #334155;
+}
+
+.history-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.history-table tbody tr:hover {
+    background: #f8faf9;
+}
+
+/* --- TABLE ACTIONS --- */
+.history-table button, 
+.print-action-btn {
+    background: #46E483;
+    color: #0A2923;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.history-table button:hover, 
+.print-action-btn:hover {
+    background: #33d56b;
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT RESPONSES
+   ========================================================================== */
+
+@media (max-width: 1100px) {
+    .profile-header-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 30px;
+    }
+
+    .patient-profile-left,
+    .patient-profile-right {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .patient-badges {
+        justify-content: center;
+    }
+
+    .patient-meta-grid {
+        text-align: left;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-page-container {
+        margin: 20px auto;
+    }
+
+    .profile-section {
+        padding: 20px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .patient-profile-center h1 {
+        font-size: 26px;
+    }
+
+    /* Wrap table cells responsibly into a horizontal slide container view */
+    .history-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Profile | PulseOne</title>
+    <link rel="stylesheet" href="patient-profile-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .app-footer { background-color: #061714; padding: 60px 5% 40px 5%; color: #ffffff; margin-top: 40px; border-top: 4px solid #46E483; }
+        .footer-primary-layout { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+        .footer-branding-cell { flex: 1; min-width: 280px; }
+        .footer-links-column { display: flex; flex-direction: column; gap: 12px; min-width: 150px; }
+        .footer-links-column h4 { color: #46E483; margin-bottom: 8px; font-size: 16px; }
+        .footer-links-column a { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+        .footer-links-column a:hover { color: #46E483; }
+        .footer-bottom-bar { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; margin-top: 40px; font-size: 13px; color: rgba(255,255,255,0.4); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="profile-page-container">
+
+    <section class="profile-header-card">
+        <div class="patient-profile-left">
+            <img src="../assets/patient-profile.png" class="patient-profile-image" alt="Patient" onerror="this.style.display='none'; document.getElementById('display-avatar-fallback').style.display='flex';">
+            <div id="display-avatar-fallback" style="width:180px; height:180px; border-radius:50%; background:#dff7e8; color:#0A2923; display:none; align-items:center; justify-content:center; font-size:4rem; font-weight:700; border:6px solid #46E483; text-transform:uppercase; margin:0 auto;">P</div>
+            <button class="btn-upload-photo">Change Photo</button>
+        </div>
+
+        <div class="patient-profile-center">
+            <h1 id="profile-card-patient-name">Synchronizing Identity...</h1>
+            <p class="patient-id" id="profile-card-patient-id">PulseOne Patient ID : PAT-PLS-2026-XXXXX</p>
+
+            <div class="patient-badges">
+                <span class="badge verified">✓ Verified Patient</span>
+                <span class="badge royalty" id="patient-membership-status">Standard Profile Tier</span>
+            </div>
+
+            <div class="patient-meta-grid">
+                <div><label>Age</label><p id="meta-computed-age">-- Years</p></div>
+                <div><label>Gender</label><p>Male</p></div>
+                <div><label>Blood Group</label><p id="meta-blood-group">B+</p></div>
+                <div><label>Height</label><p id="meta-height">178 cm</p></div>
+                <div><label>Weight</label><p id="meta-weight">74 kg</p></div>
+            </div>
+        </div>
+
+        <div class="patient-profile-right">
+            <button id="toggle-edit" onclick="commitProfileModifications(event)">Save Profile</button>
+            <button onclick="window.location.href='patient-dashboard.html'" style="background:#0A2923; color:#fff;">Console Dashboard</button>
+            <button style="background-color: #EF4444; color: #FFFFFF;" onclick="executePlatformSecureLogout()">Secure Logout</button>
+        </div>
+    </section>
+
+    <section class="profile-section">
+        <h2>Personal Information</h2>
+        <div class="info-grid">
+            <div class="input-group"><label>Full Name</label><input type="text" id="input-patient-name" required></div>
+            <div class="input-group"><label>Email Address / Account Node</label><input type="email" id="input-patient-email" readonly style="opacity:0.7; background:#f8fafc; cursor:not-allowed;"></div>
+            <div class="input-group"><label>Mobile Number</label><input type="text" id="input-patient-mobile"></div>
+            <div class="input-group"><label>Alternate Contact</label><input type="text" id="input-patient-alternate"></div>
+            <div class="input-group full-width"><label>Date Of Birth</label><input type="date" id="input-patient-dob"></div>
+            <div class="input-group full-width"><label>Registered Residential Address Node</label><textarea id="input-patient-address" style="border:1px solid #d9e3df; border-radius:10px; padding:12px; height:80px; resize:none;"></textarea></div>
+        </div>
+    </section>
+
+    <section class="profile-section">
+        <h2>Medical Information</h2>
+        <div class="info-grid">
+            <div class="input-group"><label>Blood Group Reference</label><input type="text" id="input-patient-blood"></div>
+            <div class="input-group"><label>Height (cm)</label><input type="number" id="input-patient-height"></div>
+            <div class="input-group"><label>Weight (kg)</label><input type="number" id="input-patient-weight"></div>
+            <div class="input-group"><label>Known Allergies Index</label><input type="text" id="input-patient-allergies"></div>
+            <div class="input-group"><label>Chronic Conditions</label><input type="text" id="input-patient-conditions"></div>
+            <div class="input-group"><label>Current Medications</label><input type="text" id="input-patient-medications"></div>
+            <div class="input-group full-width"><label>Organ Donor Consent</label><input type="text" id="input-patient-donor"></div>
+            <div class="input-group full-width"><label>Insurance Provider Partner</label><input type="text" id="input-patient-insurance"></div>
+        </div>
+    </section>
+
+    <section class="profile-section">
+        <h2>Scheduled Upcoming Clinical Appointments</h2>
+        <table class="history-table">
+            <thead>
+                <tr><th>Doctor</th><th>Clinic Hub</th><th>Timeline Request</th><th>Expected Yield</th><th>Clearing Status</th></tr>
+            </thead>
+            <tbody id="active-appointments-table-body">
+                <tr><td colspan="5" style="text-align: center; color: #667572; padding: 24px;">Synchronizing active upcoming allocations...</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="profile-section">
+        <h2>Consultancy History (Past Records)</h2>
+        <table class="history-table">
+            <thead>
+                <tr><th>Doctor</th><th>Clinic Hub</th><th>Past Timeline</th><th>Fee Log</th><th>Receipt Ledger</th></tr>
+            </thead>
+            <tbody id="history-appointments-table-body">
+                <tr><td colspan="5" style="text-align: center; color: #667572; padding: 24px;">No past consulting tracks logged inside database.</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+</div>
+
+<footer class="app-footer">
+    <div class="footer-primary-layout">
+        <div class="footer-branding-cell">
+            <div class="logo-block-footer" style="margin-bottom: 15px;"><img src="../assets/logo.png" width="200" height="50" alt="PulseOne Network Hub Logo"/></div>
+            <p style="font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; max-width: 450px;">Structured healthcare infrastructure designed to connect hospitals, patients, and diagnostics into one seamless system.</p>
+        </div>
+        <div class="footer-links-column"><h4>Company</h4><a href="#about">About Us</a><a href="#contact">Contact</a></div>
+        <div class="footer-links-column"><h4>Solutions</h4><a href="#solutions">For Providers</a><a href="#solutions">For Patients</a><a href="#medical">Medical Access</a></div>
+        <div class="footer-links-column"><h4>Programs</h4><a href="#royalty">Royalty Membership</a><a href="#partner">Partner With Us</a></div>
+    </div>
+    <div class="footer-bottom-bar">
+        <span>&copy; 2026 PulseOne Infrastructure. All rights reserved.</span>
+        <div style="display:flex; gap:20px;"><span>ISO Certified</span><span>Secure Healthcare Systems</span></div>
+    </div>
+</footer>
+
+<script>
+   // Change this line:
+// var API_PATIENT_REMOTE_BASE = 'http://localhost:5000/api/auth/patient';
+
+// To this dynamic detection:
+var IS_PRODUCTION = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+var API_SERVER_HOST = IS_PRODUCTION ? 'https://your-backend-app-name.onrender.com' : 'http://localhost:5000';
+var API_PATIENT_REMOTE_BASE = API_SERVER_HOST + '/api/auth/patient';
+
+    window.patientAppointmentsCache = [];
+
+    document.addEventListener("DOMContentLoaded", function() { synchronizePatientProfileAndLedger(); });
+
+    function calculateRealtimeAge(dobString) {
+        if (!dobString) return "-- Years";
+        var birthDate = new Date(dobString);
+        var today = new Date();
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
+        return age + " Years";
+    }
+
+    async function synchronizePatientProfileAndLedger() {
+        var activeTable = document.getElementById('active-appointments-table-body');
+        var historyTable = document.getElementById('history-appointments-table-body');
+        var cardNameNode = document.getElementById('profile-card-patient-name');
+        var avatarFallback = document.getElementById('display-avatar-fallback');
+        var activeToken = localStorage.getItem('pulseone_user_token');
+        if (!activeToken) return;
+
+        var databasePatientId = null;
+        try {
+            var tokenBase64 = activeToken.split('.')[1];
+            databasePatientId = JSON.parse(atob(tokenBase64)).id;
+        } catch (jwtErr) { console.error("Identity decoding anomaly:", jwtErr); }
+        if (!databasePatientId) return;
+
+        try {
+            var profileResponse = await fetch(API_PATIENT_REMOTE_BASE + '/profile/' + databasePatientId, {
+                method: 'GET', headers: { 'Authorization': 'Bearer ' + activeToken }
+            });
+
+            if (profileResponse.ok) {
+                var profileData = await profileResponse.json();
+                if (profileData.success && profileData.patient) {
+                    var dbUser = profileData.patient;
+                    
+                    if (cardNameNode) cardNameNode.innerText = dbUser.name || "PulseOne Member";
+                    if (avatarFallback && dbUser.name) avatarFallback.innerText = dbUser.name.charAt(0).toUpperCase();
+                    document.getElementById('profile-card-patient-id').innerText = 'PulseOne Patient ID : ' + dbUser.id;
+                    
+                    document.getElementById('input-patient-name').value = dbUser.name || "";
+                    document.getElementById('input-patient-email').value = dbUser.email || "";
+                    document.getElementById('input-patient-mobile').value = dbUser.mobileNo || "";
+                    document.getElementById('input-patient-alternate').value = dbUser.alternateContact || "";
+                    document.getElementById('input-patient-dob').value = dbUser.dob || "";
+                    document.getElementById('input-patient-address').value = dbUser.address || "";
+
+                    document.getElementById('meta-computed-age').innerText = calculateRealtimeAge(dbUser.dob);
+                    document.getElementById('input-patient-blood').value = dbUser.bloodGroup || "B+";
+                    document.getElementById('meta-blood-group').innerText = dbUser.bloodGroup || "B+";
+                    
+                    document.getElementById('input-patient-height').value = dbUser.height || 178;
+                    document.getElementById('meta-height').innerText = (dbUser.height || 178) + " cm";
+
+                    document.getElementById('input-patient-weight').value = dbUser.weight || 74;
+                    document.getElementById('meta-weight').innerText = (dbUser.weight || 74) + " kg";
+                    
+                    document.getElementById('input-patient-allergies').value = dbUser.allergies || "";
+                    document.getElementById('input-patient-conditions').value = dbUser.chronicConditions || "";
+                    document.getElementById('input-patient-medications').value = dbUser.medications || "";
+                    document.getElementById('input-patient-donor').value = dbUser.organDonor || "No";
+                    document.getElementById('input-patient-insurance').value = dbUser.insuranceProvider || "";
+
+                    var membershipBadge = document.getElementById('patient-membership-status');
+                    if (membershipBadge) {
+                        membershipBadge.innerText = dbUser.isRoyaltyMember ? "Royalty Elite Member" : "Standard Profile Tier";
+                        membershipBadge.className = dbUser.isRoyaltyMember ? "badge royalty" : "badge verified";
+                    }
+                }
+            }
+        } catch (err) { console.error(err); }
+
+        try {
+            var response = await fetch(API_PATIENT_REMOTE_BASE + '/pending-requests/' + databasePatientId, {
+                method: 'GET', headers: { 'Authorization': 'Bearer ' + activeToken }
+            });
+            var resData = await response.json();
+            var appointmentsArray = resData.success ? (resData.list || []) : [];
+            window.patientAppointmentsCache = appointmentsArray;
+
+            if (activeTable) activeTable.innerHTML = "";
+            if (historyTable) historyTable.innerHTML = "";
+
+            var currentSystemDateString = new Date().toISOString().split('T')[0];
+            var activeAllocations = appointmentsArray.filter(function(item) { return item.appointmentDate >= currentSystemDateString; });
+            var historyAllocations = appointmentsArray.filter(function(item) { return item.appointmentDate < currentSystemDateString; });
+
+            if (activeAllocations.length === 0) {
+                activeTable.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:24px; color:#667572;">No active upcoming scheduled allocations documented.</td></tr>';
+            } else {
+                activeAllocations.forEach(function(item) {
+                    var isConfirmed = (item.status === 'approved' || item.status === 'allocated');
+                    var actionButton = isConfirmed ? '<button type="button" onclick="printAppointmentReceipt(\'' + (item._id || item.id) + '\')">📄 Print Receipt</button>' : '<span style="color:#7a8b88; font-size:12px; font-style:italic;">Awaiting Confirmation...</span>';
+                    activeTable.innerHTML += '<tr><td><strong>Dr. ' + (item.doctorName || 'Specialist') + '</strong></td><td>' + (item.clinicTitle || 'PulseOne Center') + '</td><td>📅 ' + item.appointmentDate + ' <br> <small style="color:#667572;">⏰ ' + item.appointmentTime + '</small></td><td style="font-weight:700; color:#16833c;">₹' + (item.computedFee || 500) + '</td><td>' + actionButton + '</td></tr>';
+                });
+            }
+
+            if (historyAllocations.length === 0) {
+                historyTable.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:24px; color:#667572;">No past historical reservations logged on record.</td></tr>';
+            } else {
+                historyAllocations.forEach(function(item) {
+                    historyTable.innerHTML += '<tr style="background:#fcfdfd; opacity:0.9;"><td>Dr. ' + (item.doctorName || 'Specialist') + '</td><td>' + (item.clinicTitle || 'PulseOne Center') + '</td><td>📅 ' + item.appointmentDate + '</td><td style="font-weight:600; color:#475569;">₹' + (item.computedFee || 500) + '</td><td><button type="button" onclick="printAppointmentReceipt(\'' + (item._id || item.id) + '\')" style="background:#667572; color:#fff;">View Archive</button></td></tr>';
+                });
+            }
+        } catch (err) { console.error(err); }
+    }
+
+    async function commitProfileModifications(event) {
+        event.preventDefault();
+        var activeToken = localStorage.getItem('pulseone_user_token');
+        var cardIdText = document.getElementById('profile-card-patient-id').innerText;
+        var cleanPatientId = cardIdText.replace('PulseOne Patient ID : ', '').trim();
+        if (!cleanPatientId || cleanPatientId.includes('XXXX') || !activeToken) return alert("Lifecycle sync error.");
+
+        var getVal = function(id) { var el = document.getElementById(id); return el ? el.value.trim() : ""; };
+        var parsedWeight = parseInt(getVal('input-patient-weight'), 10);
+        var parsedHeight = parseInt(getVal('input-patient-height'), 10);
+
+        var payload = {
+            patientId: cleanPatientId,
+            name: getVal('input-patient-name'),
+            mobileNo: getVal('input-patient-mobile'),
+            alternateContact: getVal('input-patient-alternate'),
+            dob: getVal('input-patient-dob'),
+            address: getVal('input-patient-address'),
+            bloodGroup: getVal('input-patient-blood'),
+            height: isNaN(parsedHeight) ? 178 : parsedHeight,
+            weight: isNaN(parsedWeight) ? 74 : parsedWeight,
+            allergies: getVal('input-patient-allergies'),
+            chronicConditions: getVal('input-patient-conditions'),
+            medications: getVal('input-patient-medications'),
+            organDonor: getVal('input-patient-donor'),
+            insuranceProvider: getVal('input-patient-insurance')
+        };
+
+        try {
+            var responseStream = await fetch(API_PATIENT_REMOTE_BASE + '/update-health-profile', {
+                method: 'POST', headers: { 'Authorization': 'Bearer ' + activeToken, 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            var resData = await responseStream.json();
+            if (responseStream.ok && resData.success) {
+                alert("Profile metrics synchronized across PulseOne database layers successfully!");
+                await synchronizePatientProfileAndLedger(); 
+            } else { alert("Update failed: " + resData.message); }
+        } catch (err) { alert("Network link dropped committing profile adjustments."); }
+    }
+
+    function printAppointmentReceipt(apptId) {
+        var appt = window.patientAppointmentsCache.find(function(a) { return (a._id === apptId || a.id === apptId); });
+        if (!appt) return alert("System cannot resolve the selected receipt reference.");
+        var receiptWindow = window.open('receipt-template.html', '_blank', 'width=800,height=600');
+        if (!receiptWindow) return alert("Popup blocker blocked printing window frame execution layout.");
+        receiptWindow.onload = function() { receiptWindow.postMessage(appt, '*'); };
+    }
+
+    function executePlatformSecureLogout() { localStorage.clear(); window.location.href = '../feature-auth/auth.html'; }
+</script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Profile | PulseOne</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="doctor-profile-style.css">
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</head>
+<body>
+
+<div class="profile-page-container">
+
+    <section class="profile-header-card">
+        <div class="doctor-profile-left">
+            <div class="profile-avatar-circle" style="width: 140px; height: 140px; border-radius: 50%; background: #E2F6EC; color: #0A2923; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; font-weight: 700; border: 5px solid #E6EEEA; text-transform: uppercase;">D</div>
+            <button class="btn-upload-photo" style="margin-top: 12px;">Change Photo</button>
+        </div>
+
+        <div class="doctor-profile-center">
+            <h1 id="profile-card-name">Synchronizing Identity...</h1>
+            <p class="doctor-speciality" id="profile-card-clinic">PulseOne Network Aligned Clinic</p>
+
+            <div class="doctor-badges">
+                <span class="badge verified">✓ Verified Doctor</span>
+                <span class="badge premium" id="provider-profile-status">Standard Tier</span>
+            </div>
+
+            <div class="doctor-meta-grid">
+                <div>
+                    <label>Doctor ID</label>
+                    <p id="profile-display-id">DOC-PLS-2026-XXXX</p>
+                </div>
+                <div>
+                    <label>Linked Registry Email</label>
+                    <p id="profile-display-license">Fetching...</p>
+                </div>
+                <div>
+                    <label>Cumulative Experience</label>
+                    <p id="profile-display-experience">0 Years</p>
+                </div>
+                <div>
+                    <label>Financial Base Rate</label>
+                    <p id="profile-display-fee">₹0.00</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="doctor-profile-right">
+            <button onclick="window.location.href='doctor-dashboard.html'" style="background:#0A2923; color:#fff; border:none; padding:10px 16px; border-radius:6px; cursor:pointer; font-weight:600; width: 100%;">Console Dashboard</button>
+            <button style="background-color: #EF4444; color: #FFFFFF; border:none; padding:10px 16px; border-radius:6px; cursor:pointer; font-weight:600; margin-top:8px; width: 100テーマ;" onclick="executePlatformSecureLogout()">Secure Logout</button>
+        </div>
+    </section>
+
+    <section class="profile-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h2 style="margin: 0;">Staged Appointment Bookings & Allocations</h2>
+            <button onclick="synchronizeDoctorProfileAndLedger()" style="background: #0A2923; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer;">🔄 Refresh Queue</button>
+        </div>
+        <table class="documents-table">
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Timeline Request</th>
+                    <th>Expected Yield</th>
+                    <th>Clearing Status</th>
+                    <th>Administrative Actions</th>
+                </tr>
+            </thead>
+            <tbody id="doctor-appointments-table-body">
+                <tr>
+                    <td colspan="5" style="text-align: center; color: #64748b; padding: 24px;">Synchronizing active upcoming slots ledger layers...</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="profile-section">
+        <h2 style="margin: 0 0 16px 0;">Historical Medical Archives & Completed Sessions Ledger</h2>
+        <table class="documents-table">
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Past Timeline</th>
+                    <th>Cleared Fee Log</th>
+                    <th>Resolution Status</th>
+                    <th>Case Files Tracking</th>
+                </tr>
+            </thead>
+            <tbody id="doctor-history-table-body">
+                <tr>
+                    <td colspan="5" style="text-align: center; color: #64748b; padding: 24px;">No historical data records loaded inside this segment node.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="profile-section" id="practitioner-profile-settings">
+        <h2>Update Professional Profile Node</h2>
+        <div class="profile-manager-form-layout-box" style="border:none; padding:0; box-shadow:none;">
+            <form onsubmit="commitProfileModifications(event)">
+                
+                <div class="info-grid" style="margin-bottom: 20px;">
+                    <div class="input-group">
+                        <label>Practitioner Display Title / Legal Name</label>
+                        <input type="text" id="input-doc-name" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Medical Council License Registration ID / Email</label>
+                        <input type="text" id="input-doc-license" disabled style="opacity: 0.6; cursor: not-allowed; background:#f8fafc;">
+                    </div>
+                </div>
+
+                <div class="input-group full-width" style="margin-bottom: 20px;">
+                    <label>Aligned Clinic / Hospital Corporate Entity Name</label>
+                    <input type="text" id="input-doc-clinic" required>
+                </div>
+
+                <div class="info-grid" style="margin-bottom: 20px;">
+                    <div class="input-group">
+                        <label>Practitioner Classification Category</label>
+                        <select id="input-doc-practitioner-type" required>
+                            <option value="general-physician">General Physician / Care Unit</option>
+                            <option value="dermatologist">Dermatologist / Skin Specialist</option>
+                            <option value="gynecologist">Gynecologist / Obstetrician</option>
+                            <option value="cardiologist">Cardiologist / Heart Specialist</option>
+                            <option value="dental">Dental Practitioner / Surgery Clinic</option>
+                            <option value="pediatrician">Pediatrician / Child Care</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Assigned Gender Identity</label>
+                        <select id="input-doc-gender" required>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="info-grid" style="margin-bottom: 20px;">
+                    <div class="input-group">
+                        <label>Accumulated Experience Track (Years)</label>
+                        <input type="number" id="input-doc-experience" min="0" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Base Intake Consultation Fee Rate (INR)</label>
+                        <input type="number" id="input-doc-base-fee" min="0" required>
+                    </div>
+                </div>
+
+                <div class="input-group full-width" style="margin-bottom: 20px;">
+                    <label>Treatable Diseases / Symptoms Index Tags (Comma Separated)</label>
+                    <input type="text" id="input-doc-specialties-list" placeholder="e.g., fever, cough, cold, acne, dental pain, heart" required>
+                </div>
+
+                <div class="input-group full-width" style="margin-bottom: 20px;">
+                    <label>Professional Bio Context / Speciality Summary</label>
+                    <textarea id="input-doc-bio" rows="3" style="width:100%; padding:12px; border:1px solid #CCDAD4; border-radius:12px; font-family:'Plus Jakarta Sans', sans-serif;"></textarea>
+                </div>
+
+                <button type="submit" class="btn-upload-photo" style="padding: 14px 28px; border-radius: 12px; background: #16a34a; color:#fff; border:none; cursor:pointer; font-weight:700; font-family:'Plus Jakarta Sans', sans-serif;">Commit Structural Changes to Database</button>
+            </form>
+        </div>
+    </section>
+
+</div>
+
+<footer class="app-footer" style="background-color: #061714; padding: 60px 10% 40px 10%; color: #ffffff; width: 100%; margin-top: 40px;">
+    <div class="footer-primary-layout">
+        <div class="footer-branding-cell">
+            <div class="logo-block-footer" style="margin-bottom: 12px;">
+                 <img src="../assets/logo.png" width="180" height="45" alt="PulseOne Logo"/>
+            </div>
+            <p class="footer-mission-text" style="font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; max-width:450px;">Structured healthcare infrastructure designed to connect hospitals, patients, and diagnostics into one seamless system.</p>
+        </div>
+    </div>
+    <div class="footer-bottom-bar" style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; margin-top: 20px; font-size: 13px; color: rgba(255,255,255,0.4);">
+        <span>&copy; 2026 PulseOne Infrastructure. All rights reserved.</span>
+    </div>
+</footer>
+
+<script>
+  // Change this line:
+// const API_DOCTOR_REMOTE_BASE = 'http://localhost:5000/api/auth/doctor';
+
+// To this dynamic detection:
+const IS_PRODUCTION = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+const API_SERVER_HOST = IS_PRODUCTION ? 'https://your-backend-app-name.onrender.com' : 'http://localhost:5000';
+const API_DOCTOR_REMOTE_BASE = API_SERVER_HOST + '/api/auth/doctor';
+
+    window.doctorAppointmentsCache = [];
+
+    document.addEventListener("DOMContentLoaded", () => {
+        synchronizeDoctorProfileAndLedger();
+    });
+
+    /* ==========================================================================
+       UNIFIED MASTER SYNCHRONIZER: CHRONOLOGICAL DOUBLE TABLE SORT MECHANICS
+       ========================================================================== */
+    async function synchronizeDoctorProfileAndLedger() {
+        const activeToken = localStorage.getItem('pulseone_user_token');
+        const activeTableBody = document.getElementById('doctor-appointments-table-body');
+        const historyTableBody = document.getElementById('doctor-history-table-body');
+        
+        if (!activeToken) return;
+
+        let databaseDoctorId = null;
+        try {
+            const tokenBase64 = activeToken.split('.')[1];
+            const decodedPayload = JSON.parse(atob(tokenBase64));
+            databaseDoctorId = decodedPayload.id || decodedPayload._id;
+        } catch (e) { console.error("JWT Parsing exception:", e); }
+
+        if (!databaseDoctorId) return;
+
+        // --- SUB-TASK A: FETCH FRESH PRACTITIONER CRITERIA FIELDS ---
+        try {
+            const responseStream = await fetch(`${API_DOCTOR_REMOTE_BASE}/profile/${databaseDoctorId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${activeToken}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+            const resData = await responseStream.json();
+
+            if (responseStream.ok && resData.success && resData.doctor) {
+                const docData = resData.doctor;
+                
+                document.getElementById('profile-card-name').innerText = docData.ownerName || "Practitioner Node";
+                document.getElementById('profile-card-clinic').innerText = `${docData.clinicTitle || 'PulseOne Clinic'} | ${(docData.practitionerType || '').toUpperCase()}`;
+                document.getElementById('profile-display-id').innerText = docData._id || docData.id;
+                document.getElementById('profile-display-license').innerText = docData.ownerEmail || "";
+                document.getElementById('profile-display-experience').innerText = `${docData.experienceYears || 0} Years`;
+                document.getElementById('profile-display-fee').innerText = `₹${(docData.baseConsultationFee || 0).toLocaleString('en-IN')}.00`;
+                
+                const avatar = document.querySelector('.profile-avatar-circle');
+                if (avatar && docData.ownerName) avatar.innerText = docData.ownerName.charAt(0).toUpperCase();
+
+                const royaltyBadge = document.getElementById('provider-profile-status');
+                if (royaltyBadge) {
+                    royaltyBadge.innerText = docData.isRoyaltyMember ? "Premium Royalty Partner" : "Standard Tier";
+                    royaltyBadge.style.background = docData.isRoyaltyMember ? "#fef3c7" : "#e2e8f0";
+                    royaltyBadge.style.color = docData.isRoyaltyMember ? "#92400e" : "#334155";
+                }
+
+                document.getElementById('input-doc-name').value = docData.ownerName || "";
+                document.getElementById('input-doc-license').value = docData.ownerEmail || "";
+                document.getElementById('input-doc-clinic').value = docData.clinicTitle || "";
+                document.getElementById('input-doc-bio').value = docData.specialitySummary || "";
+                document.getElementById('input-doc-practitioner-type').value = docData.practitionerType || "general-physician";
+                document.getElementById('input-doc-gender').value = docData.gender || "male";
+                document.getElementById('input-doc-experience').value = docData.experienceYears ?? 0;
+                document.getElementById('input-doc-base-fee').value = docData.baseConsultationFee ?? 0;
+                
+                if (docData.specialitiesList) {
+                    document.getElementById('input-doc-specialties-list').value = docData.specialitiesList.join(', ');
+                }
+            }
+        } catch (err) { console.error("Demographics stream error:", err); }
+
+        // --- SUB-TASK B: FETCH & ARRANGE WORKFLOWS DYNAMICALLY BY DATE BOUNDARY ---
+        try {
+            const scheduleResponse = await fetch(`${API_DOCTOR_REMOTE_BASE}/confirmed-schedule/${databaseDoctorId}`, {
+                method: 'GET',
+                headers: { 'Authorization': `Bearer ${activeToken}` }
+            });
+            const resData = await scheduleResponse.json();
+
+            if (scheduleResponse.ok && resData.success && resData.list) {
+                window.doctorAppointmentsCache = resData.list;
+                
+                if (activeTableBody) activeTableBody.innerHTML = "";
+                if (historyTableBody) historyTableBody.innerHTML = "";
+
+                // Calculate the current calendar text layout checkpoint
+                const currentSystemDateString = new Date().toISOString().split('T')[0];
+
+                // Seggregate rows based on calendar timeline intersections
+                const upcomingSlots = window.doctorAppointmentsCache.filter(item => item.appointmentDate >= currentSystemDateString);
+                const historicalLogs = window.doctorAppointmentsCache.filter(item => item.appointmentDate < currentSystemDateString);
+
+                // 1. RENDER ACTIVE UPCOMING SLOTS
+                if (upcomingSlots.length === 0) {
+                    activeTableBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:32px; color:#64748b; font-size:14px;">No upcoming allocated slots documented for today or future dates.</td></tr>`;
+                } else {
+                    upcomingSlots.forEach(item => {
+                        activeTableBody.innerHTML += `
+                            <tr style="border-bottom: 1px solid #E6EEEA;">
+                                <td style="font-size:14px; font-weight:600; color:#0A2923; padding:16px 12px;">${item.patientName}</td>
+                                <td style="font-size:13px; color:#334155;">📅 ${item.appointmentDate} <br> <small style="color:#64748b;">⏰ ${item.appointmentTime}</small></td>
+                                <td style="font-size:14px; font-weight:700; color:#15803D;">₹${item.computedFee || 500}</td>
+                                <td><span style="color: #166534; background:#dcfce7; font-weight:600; padding:4px 10px; border-radius:30px; font-size:11px; text-transform:uppercase;">Confirmed</span></td>
+                                <td><span style="color:#16a34a; font-size:12px; font-weight:600;">🔒 Allocation Locked</span></td>
+                            </tr>`;
+                    });
+                }
+
+                // 2. RENDER HISTORICAL PAST ENTRIES
+                if (historicalLogs.length === 0) {
+                    historyTableBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:32px; color:#94a3b8; font-size:14px;">No past consulting tracks logged inside database.</td></tr>`;
+                } else {
+                    historicalLogs.forEach(item => {
+                        historyTableBody.innerHTML += `
+                            <tr style="border-bottom: 1px solid #E6EEEA; background:#fafcfc; opacity:0.85;">
+                                <td style="font-size:14px; font-weight:500; color:#475569; padding:16px 12px;">${item.patientName}</td>
+                                <td style="font-size:13px; color:#64748b;">📅 ${item.appointmentDate}</td>
+                                <td style="font-size:14px; font-weight:600; color:#475569;">₹${item.computedFee || 500}</td>
+                                <td><span style="color: #475569; background:#f1f5f9; font-weight:600; padding:4px 10px; border-radius:30px; font-size:11px; text-transform:uppercase;">Archived</span></td>
+                                <td><span style="color:#475569; font-size:12px; font-weight:500; font-style:italic;">Session Completed</span></td>
+                            </tr>`;
+                    });
+                }
+            }
+        } catch(err) {
+            console.error("Schedule ledger sync failure:", err);
+        }
+    }
+
+    async function handleAppointmentAction(appointmentId, decisionString) {
+        const activeToken = localStorage.getItem('pulseone_user_token');
+        try {
+            const tableBody = document.getElementById('doctor-appointments-table-body');
+            if (tableBody) {
+                tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #64748b; padding: 24px;">Updating clinical ledger state...</td></tr>`;
+            }
+
+            const response = await fetch(`${API_DOCTOR_REMOTE_BASE}/respond-to-appointment`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${activeToken}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ appointmentId, responseStatus: decisionString })
+            });
+            
+            const resData = await response.json();
+            if (response.ok && resData.success) {
+                synchronizeDoctorProfileAndLedger();
+            }
+        } catch (e) { 
+            console.error("Real-time decision handshake error:", e); 
+            synchronizeDoctorProfileAndLedger();
+        }
+    }
+
+    async function commitProfileModifications(event) {
+        event.preventDefault();
+        const activeToken = localStorage.getItem('pulseone_user_token');
+        const doctorId = document.getElementById('profile-display-id').innerText;
+        
+        if (!doctorId || !activeToken) return;
+
+        const ownerName = document.getElementById('input-doc-name').value.trim();
+        const clinicTitle = document.getElementById('input-doc-clinic').value.trim();
+        const bioSummary = document.getElementById('input-doc-bio').value.trim();
+        const practitionerType = document.getElementById('input-doc-practitioner-type').value;
+        const gender = document.getElementById('input-doc-gender').value;
+        const experienceYears = parseInt(document.getElementById('input-doc-experience').value) || 0;
+        const baseConsultationFee = parseInt(document.getElementById('input-doc-base-fee').value) || 0;
+        const rawSpecialties = document.getElementById('input-doc-specialties-list').value;
+        const specialitiesList = rawSpecialties.split(',').map(item => item.trim().toLowerCase()).filter(item => item !== "");
+
+        try {
+            const responseStream = await fetch(`${API_DOCTOR_REMOTE_BASE}/update-medical-profile`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${activeToken}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ doctorId, ownerName, clinicTitle, bioSummary, practitionerType, specialitiesList, baseConsultationFee, gender, experienceYears, supportedModes: ['clinic'] })
+            });
+
+            const resData = await responseStream.json();
+            if (responseStream.ok && resData.success) {
+                synchronizeDoctorProfileAndLedger();
+            }
+        } catch (err) { console.error("Handshake error updating profile matrix.", err); }
+    }
+
+    function executePlatformSecureLogout() {
+        localStorage.clear();
+        window.location.href = '../feature-auth/auth.html';
+    }
+</script>
+</body>
+</html>
