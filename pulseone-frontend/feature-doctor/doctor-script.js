@@ -2,7 +2,7 @@
    PULSEONE CLINICAL PRACTITIONER INTERFACE CONTROL PLATFORM ENGINE
    ========================================================================== */
 const IS_PRODUCTION = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
-const API_SERVER_HOST = IS_PRODUCTION ? 'https://your-backend-app-name.onrender.com' : 'http://localhost:5000';
+const API_SERVER_HOST = IS_PRODUCTION ? 'https://pulseone-3.onrender.com' : 'http://localhost:5000';
 
 const API_DOCTOR_REMOTE_BASE = API_SERVER_HOST + '/api/auth/doctor';
 const API_PATIENT_REMOTE_BASE = API_SERVER_HOST + '/api/auth/patient';
