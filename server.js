@@ -18,7 +18,7 @@ const allowedOrigins = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
     // ⚠️ TODO: Replace this placeholder with your exact frontend URL once deployed on Render/Vercel
-    'https://your-frontend-app-name.onrender.com' 
+    'https://pulseone-3.onrender.com' 
 ];
 
 const corsOptions = {
