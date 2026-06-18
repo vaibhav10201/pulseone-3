@@ -1,6 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+     <!-- Inject inside feature-landing/index.html <head> layer -->
+<script>
+    (function checkLandingRedirectGuard() {
+        const activeToken = localStorage.getItem('pulseone_user_token');
+        const assignedRole = localStorage.getItem('pulseone_user_role');
+        
+        if (activeToken && assignedRole) {
+            if (assignedRole === 'doctor') {
+                window.location.href = '../feature-doctor/doctor-dashboard.html';
+            } else if (assignedRole === 'patient') {
+                window.location.href = '../feature-patient/patient-dashboard.html';
+            }
+        }
+    })();
+</script>
+
+
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PulseOne - Structured Healthcare Platform</title>
@@ -10,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Style Sheet Link -->
     <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="global-tokens.css">
+    <link rel="stylesheet" href="../css/global-tokens.css">
 </head>
 <body>
 
@@ -18,7 +38,7 @@
     <header class="main-header">
         <nav class="nav-container">
             <div class="logo-block" onclick="navigateTo('home')">
-                <img src="assets/logo.png" width="200" height="50" alt="PulseOne Logo"/>
+                <img src="../assets/logo.png" width="200" height="50" alt="PulseOne Logo"/>
             </div>
             <div class="nav-links">
                 <a href="#about" class="nav-item" onclick="navigateTo('about')">About Us</a>
@@ -28,8 +48,8 @@
             </div>
             <!-- REMOVED: Submit Inquiry | ADDED: Explicit Routing Action Cluster -->
             <div class="auth-action-group">
-                <button class="btn-login-ghost" onclick="window.location.href='auth.html'">Login</button>
-                <button class="btn-signup" onclick="window.location.href='auth.html'">Sign Up</button>
+                <button class="btn-login-ghost" onclick="window.location.href='../feature-auth/auth.html'">Login</button>
+                <button class="btn-signup" onclick="window.location.href='../feature-auth/auth.html'">Sign Up</button>
             </div>
         </nav>
     </header>
@@ -373,7 +393,7 @@
         <div class="footer-primary-layout">
             <div class="footer-branding-cell">
                 <div class="logo-block-footer">
-                     <img src="assets/logo.png" width="200" height="50" alt="PulseOne Logo"/>
+                     <img src="../assets/logo.png" width="200" height="50" alt="PulseOne Logo"/>
                 </div>
                 <p class="footer-mission-text">Structured healthcare infrastructure designed to connect hospitals, patients, and diagnostics into one seamless system.</p>
                 <div class="social-icon-row">
@@ -412,6 +432,6 @@
     </footer>
 
     <!-- Script Block -->
-    <script src="script.js"></script>
+    <script src="../core-shared-js/script.js"></script>
 </body>
 </html>

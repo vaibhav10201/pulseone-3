@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulseOne Provider - Clinical Command Node</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/global-tokens.css">
+    <link rel="stylesheet" href="doctor-dashboard-style.css">
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</head>
+<body class="dashboard-engine-body">
+
+    <div id="notification-synapse-banner" class="notification-toast-alert">
+        <div class="toast-content-pack">
+            <span class="toast-pulse-node"></span>
+            <p id="notification-toast-text">System Active: Clinical Practitioner Node verified.</p>
+        </div>
+        <button class="close-toast-btn" onclick="dismissNotificationBanner()">&times;</button>
+    </div>
+
+    <header class="main-header internal-dashboard-header">
+        <nav class="nav-container">
+            <div class="logo-block" onclick="window.location.href='../feature-landing/index.html'">
+                <img src="../assets/logo.png" width="160" height="40" alt="PulseOne Network"/>
+            </div>
+            
+            <div class="nav-links">
+                <a href="#incoming-patient-triage" class="nav-item">Patient Requests <span id="triage-count-badge" class="counter-badge" style="display: none;">0</span></a>
+                <a href="#clinical-services-stack" class="nav-item">Provided Services</a>
+                <a href="doctor-profile.html" class="nav-item">Profile Manager</a>
+                <a href="#provider-royalty-perks" class="nav-item highlight-green-text">Royalty Partner Tier</a>
+            </div>
+            
+            <div class="header-right-action-cluster">
+                <div class="wallet-status-capsule-card" onclick="revealWalletLedgerModal()">
+                    <span class="wallet-icon-ledger">&#128181;</span>
+                    <div class="wallet-meta-numbers">
+                        <span class="wallet-label-caption">Earnings / Wallet Balance</span>
+                        <span id="header-wallet-balance" class="wallet-numerical-value">₹0.00</span>
+                    </div>
+                </div>
+
+                <button class="doctor-profile-btn" onclick="window.location.href='doctor-profile.html'" title="View Profile Node">
+                    <img src="../assets/doctor-profile.png" alt="Doctor Profile" class="doctor-profile-img">
+                </button>
+
+                <button class="btn-logout-header" onclick="executePlatformSecureLogout()">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="dashboard-viewport-frame adaptive-padding-top">
+
+        <section id="clinical-telemetry-overview" class="dashboard-content-segment">
+            <div class="search-hero-context">
+                <h1 class="serif-dashboard-title" id="header-clinic-title">Clinical Command Node Space</h1>
+                <p class="search-hero-subtitle">Review incoming patient data streams, lock scheduled allocations, and evaluate network reputation indices.</p>
+            </div>
+
+            <div class="about-grid-metrics">
+                <div class="metric-block-dark">
+                    <h5>Total Consultations Dispatched</h5>
+                    <h2 class="metric-big-num" id="total-consults-counter">0</h2>
+                    <p>Continuous patient tracking loop sessions established successfully.</p>
+                </div>
+                <div class="metric-block-light">
+                    <h5>Practitioner Network Rating</h5>
+                    <h2 id="live-rating-display">⭐ 0.0 <small>/ 5.0</small></h2>
+                    <p>Based on verified patient post-discharge feedback indices.</p>
+                </div>
+                <div class="metric-block-light">
+                    <h5>Royalty Revenue Multiplier</h5>
+                    <h2 id="revenue-multiplier-display">1.0x</h2>
+                    <p>Upgrade to Royalty Tier for prioritized clinical distribution visibility parameters.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="incoming-patient-triage" class="dashboard-content-segment grid-divider-top">
+            <div class="section-header-left-aligned">
+                <span class="pill-badge badge-pulse">Live Triage Queue</span>
+                <h2>Incoming Appointment Requests</h2>
+                <p>Patients approaching your node via search or real-time broadcast. Select the optimal time slice allocation to lock the booking.</p>
+            </div>
+            <div id="triage-requests-container" class="live-incoming-quotes-matrix"></div>
+        </section>
+
+<section id="clinical-services-stack" class="dashboard-content-segment grid-divider-top">
+            <div class="section-header-left-aligned">
+                <span class="pill-badge">Service Ingestion Framework</span>
+                <h2>Your Offered Services & Telemetry Configurations</h2>
+                <p>Add new medical services, adjust live check-out price points, or remove medical options instantly from consumer search engines.</p>
+            </div>
+
+            <div class="profile-manager-form-layout-box service-add-panel-override" style="background: #ffffff; border: 1px solid #E6EEEA; border-radius: 16px; padding: 28px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(10,41,35,0.02);">
+                <h4 class="form-subsection-title" style="margin-top:0; margin-bottom: 16px; font-size: 16px; color: #0A2923; font-weight: 700;">Add New Service / Facility Stream</h4>
+                <form onsubmit="executeServiceIngestion(event)" style="display:flex; flex-direction:column; gap:18px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
+                        <div class="input-form-group" style="display:flex; flex-direction:column; gap:6px;">
+                            <label style="font-size: 12px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.5px;">Service / Test / Surgery Title</label>
+                            <input type="text" id="add-service-title" placeholder="e.g., Complete Blood Count (CBC)" required style="padding: 12px; border: 1px solid #CCDAD4; border-radius: 10px; outline: none; background: #FAFCFB; font-size: 14px;">
+                        </div>
+                        <div class="input-form-group" style="display:flex; flex-direction:column; gap:6px;">
+                            <label style="font-size: 12px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.5px;">Service Type Category</label>
+                            <select id="add-service-category" style="padding: 12px; border: 1px solid #CCDAD4; border-radius: 10px; outline: none; background: #FAFCFB; font-size: 14px; cursor: pointer;">
+                                <option value="Video Consultation">Video Consultation</option>
+                                <option value="In-Clinic Visit">In-Clinic Visit / Fixed Consult</option>
+                                <option value="Lab Telemetry">Lab Telemetry / Blood Test</option>
+                                <option value="Surgery Pathway">Surgery Pathway</option>
+                            </select>
+                        </div>
+                        <div class="input-form-group" style="display:flex; flex-direction:column; gap:6px;">
+                            <label style="font-size: 12px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.5px;">Network Fee Rate (INR)</label>
+                            <input type="number" id="add-service-price" placeholder="500" min="0" required style="padding: 12px; border: 1px solid #CCDAD4; border-radius: 10px; outline: none; background: #FAFCFB; font-size: 14px;">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary btn-emerald-theme" style="background: #0A2923; color:#fff; border:none; padding:14px; border-radius:10px; font-weight:600; font-size:14px; cursor:pointer; width: fit-content; transition: background 0.2s;" onmouseover="this.style.background='#12473D'" onmouseout="this.style.background='#0A2923'">Deploy Service Stream onto Local Networks</button>
+                </form>
+            </div>
+
+            <div id="live-services-target-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;"></div>
+        </section>
+
+        <section id="patient-feedbacks-audit" class="dashboard-content-segment grid-divider-top">
+            <div class="section-header-left-aligned">
+                <span class="pill-badge">Reputation Tracker</span>
+                <h2>Patient Reviews & Feedbacks</h2>
+                <p>Real-time audit log of verified post-discharge logs submitted down regional patient tracking loops.</p>
+            </div>
+            <div class="feedback-testimonials-grid" id="live-feedback-target-container"></div>
+        </section>
+
+        <section id="provider-royalty-perks" class="dashboard-content-segment royalty-checkout-dashboard-canvas grid-divider-top">
+            <div class="section-header-centered">
+                <div class="pill-badge-mini">Elite Provider Tiers</div>
+                <h2 class="serif-title-section-centered">PulseOne Royalty Partner Ecosystem</h2>
+                <p class="section-desc-centered">Elevate your practice practice node structures to map direct premium priority rankings.</p>
+            </div>
+
+            <div class="royalty-pricing-matrix-row">
+                <div class="pricing-card-structure hot-tier">
+                    <div class="card-tier-header">
+                        <span class="tier-badge-label">Clinical Accelerator</span>
+                        <h4>Royalty Platinum Partner Tier</h4>
+                        <p>Complete organic priority visibility matching.</p>
+                    </div>
+                    <div class="tier-pricing-display">
+                        <span class="price-currency">₹</span>
+                        <span class="price-value">9,999</span>
+                        <span class="price-tenure">/ Annual Registry</span>
+                    </div>
+                    <ul class="tier-perks-checklist">
+                        <li><span>✔</span> 1.2x Platform Multiplier credited instantly into your wallet</li>
+                        <li><span>✔</span> Top-of-page search preference index on disease query sweeps</li>
+                        <li><span>✔</span> Zero billing commission friction across patient checkouts</li>
+                        <li><span>✔</span> Direct technical integration link support desk line access</li>
+                    </ul>
+                    <button class="btn-purchase-tier-trigger" onclick="initializeProviderRoyaltyUpgrade(9999)">Activate Premium Partner Tier &rarr;</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <div class="footer-primary-layout">
+            <div class="footer-branding-cell">
+                <div class="logo-block-footer">
+                     <img src="../assets/logo.png" width="180" height="45" alt="PulseOne Logo"/>
+                </div>
+                <p class="footer-mission-text">Structured healthcare infrastructure designed to connect hospitals, patients, and diagnostics into one seamless system.</p>
+            </div>
+        </div>
+        <div class="footer-bottom-bar">
+            <span>&copy; 2026 PulseOne Infrastructure. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <div id="wallet-ledger-modal" class="modal-blur-overlay">
+        <div class="modal-surface-container">
+            <div class="modal-header-row">
+                <h3>Clinical Earnings Node (PulseWallet)</h3>
+                <button class="close-modal-trigger" onclick="closeWalletLedgerModal()">&times;</button>
+            </div>
+            <div class="modal-body-content">
+                <div class="wallet-balance-hero-block-inside">
+                    <p>Total Dispatched Net Earnings</p>
+                    <h2 id="modal-wallet-balance-display">₹0.00</h2>
+                </div>
+                <div class="enterprise-fallback-notice-card">
+                    <p><strong>Payout Operations:</strong> Clinical funds settlement runs automatically directly into your linked bank branch account every Friday at 24:00 server system time.</p>
+                </div>
+                <button class="btn-primary full-width-modifier btn-emerald-theme" onclick="closeWalletLedgerModal()">Acknowledged</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="doctor-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulseOne Network - Gatekeeper Access Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+    <!-- CORE ENGINE DESIGN LINK SYNC -->
+    <link rel="stylesheet" href="auth.css">
+    <!-- PDF GENERATION FRAMEWORK ENGINE -->
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+</head>
+<body class="auth-engine-body">
+
+    <!-- Global Floating System Toast Notifications Synapse -->
+    <div id="notification-synapse-banner" class="notification-toast-alert">
+        <div class="toast-content-pack">
+            <span id="toast-pulse-indicator" class="toast-pulse-node"></span>
+            <p id="notification-toast-text">System Handshake Active: Access point operational.</p>
+        </div>
+        <button class="close-toast-btn" onclick="dismissStatusToast()">&times;</button>
+    </div>
+
+    <!-- Master 50-50 Split View Layout Frame Wrapper -->
+    <div class="auth-split-wrapper">
+
+        <!-- ==========================================
+             LEFT CANVAS PANEL: BRAND META STATEMENTS
+             ========================================== -->
+        <div class="auth-canvas-panel">
+            <div class="canvas-branding" onclick="window.location.href='../feature-landing/index.html'">
+                <img src="../assets/logo.png" width="160" height="40" alt="PulseOne Network Header Asset"/>
+            </div>
+            
+            <div class="canvas-statement-box">
+                <h2 class="serif-title-canvas">Securing India's Coordinated Care Infrastructure.</h2>
+                <p>Deploying structured patient onboarding, clinical routing nodes, and systematic treatment workflows across localized healthcare networks.</p>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             RIGHT CONTROL PANEL: WORKSPACE ROUTING FORMS
+             ========================================== -->
+        <div class="auth-control-panel">
+            
+            <!-- Global Structural State Tab Switch Row -->
+            <div class="context-toggle-row">
+                <button type="button" id="toggle-login" class="btn-toggle active" onclick="switchContext('login')">Secure Login</button>
+                <button type="button" id="toggle-signup" class="btn-toggle" onclick="switchContext('signup')">Initialize Account</button>
+            </div>
+
+            <!-- ------------------------------------------
+                 VIEW A: UNIFIED LOGIN MODULE LAYER
+                 ------------------------------------------ -->
+            <div id="auth-login-view" class="auth-form-layer dynamic-active">
+                
+                <!-- Login Step Tier: Select Role Vector -->
+                <div id="login-step-tier" class="signup-pipeline-node active">
+                    <div class="form-context-header">
+                        <h3>Select Authorization Space</h3>
+                        <p>Identify your destination entry link node vector below to unpack security verification terminals.</p>
+                    </div>
+                    <div class="role-matrix-grid">
+                        <div class="role-selector-card" onclick="advanceLoginPipeline('doctor')">
+                            <span class="role-icon-indicator">&#129482;</span>
+                            <h4>Practitioner / Facility Command Space</h4>
+                            <p>Access hospital command workflows, adjust live checklists, or lock upcoming patient streams.</p>
+                        </div>
+                        <div class="role-selector-card" onclick="advanceLoginPipeline('patient')">
+                            <span class="role-icon-indicator">&#129657;</span>
+                            <h4>Consumer / Patient Portal</h4>
+                            <p>Review medical timeline entries, verify laboratory telemetry updates, and contact physicians.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Login Form Terminal: Clinical Practitioner Node -->
+                <div id="login-step-doctor" class="signup-pipeline-node">
+                    <div class="form-context-header">
+                        <span class="pipeline-breadcrumb" onclick="resetLoginPipeline()">&larr; Return to Roles</span>
+                        <h3>Practitioner Workspace Access</h3>
+                        <p>Provide verified practitioner email registry parameters to synchronize dashboard logs.</p>
+                    </div>
+                    <form onsubmit="handleUserAuthentication(event, 'doctor')">
+                        <div class="input-form-group">
+                            <label>Practitioner Corporate Email</label>
+                            <input type="email" placeholder="practitioner@pulseone.in" required>
+                        </div>
+                        <div class="input-form-group">
+                            <label>Secure Security Passphrase</label>
+                            <input type="password" placeholder="••••••••" required>
+                        </div>
+                        <button type="submit" class="btn-primary full-width-modifier form-action-spacer">Authorize Node Session &rarr;</button>
+                    </form>
+                </div>
+
+                <!-- Login Form Terminal: Consumer Patient Node -->
+                <div id="login-step-patient" class="signup-pipeline-node">
+                    <div class="form-context-header">
+                        <span class="pipeline-breadcrumb" onclick="resetLoginPipeline()">&larr; Return to Roles</span>
+                        <h3>Patient Account Access</h3>
+                        <p>Enter your primary registered contact vector parameters to boot tracking sessions.</p>
+                    </div>
+                    <form onsubmit="handleUserAuthentication(event, 'patient')">
+                        <div class="input-form-group">
+                            <label>Registered Email Link</label>
+                            <input type="email" placeholder="name@domain.com" required>
+                        </div>
+                        <div class="input-form-group">
+                            <label>Passphrase</label>
+                            <input type="password" placeholder="••••••••" required>
+                        </div>
+                        <button type="submit" class="btn-primary full-width-modifier form-action-spacer">Unlock Patient Vault &rarr;</button>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- ------------------------------------------
+                 VIEW B: DYNAMIC REGISTER ONBOARDING LAYER
+                 ------------------------------------------ -->
+            <div id="auth-signup-view" class="auth-form-layer">
+
+                <!-- Signup Step Tier: Role Selection Engine -->
+                <div id="signup-step-tier" class="signup-pipeline-node active">
+                    <div class="form-context-header">
+                        <h3>Initialize Network Registry Link</h3>
+                        <p>Choose your structural functional persona profile block to deploy network storage objects.</p>
+                    </div>
+                    <div class="role-matrix-grid">
+                        <div class="role-selector-card" onclick="advanceSignupPipeline('provider')">
+                            <span class="role-icon-indicator">&#127973;</span>
+                            <h4>Register Clinical Practitioner Node</h4>
+                            <p>Deploy institutional records metrics, initialize medical service items, and verify legal registries.</p>
+                        </div>
+                        <div class="role-selector-card" onclick="advanceSignupPipeline('consumer')">
+                            <span class="role-icon-indicator">&#128100;</span>
+                            <h4>Create Free Patient Care Profile</h4>
+                            <p>Map your unified personal health layout index across verified medical council databases.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Onboarding Step Patient: Standard Setup Form -->
+                <div id="signup-step-consumer" class="signup-pipeline-node">
+                    <div class="form-context-header">
+                        <span class="pipeline-breadcrumb" onclick="resetSignupPipeline()">&larr; Back to Options</span>
+                        <h3>Consumer Profile Registry</h3>
+                        <p>Configure legal demographic data links to instantiate secure account objects inside MongoDB.</p>
+                    </div>
+                    <form onsubmit="finalizeConsumerRegistration(event)">
+                        <div class="input-form-group">
+                            <label>Full Legal Name</label>
+                            <input type="text" placeholder="e.g., Manzoor Ahmad" required>
+                        </div>
+                        <div class="input-form-group">
+                            <label>Active Contact Email Vector</label>
+                            <input type="email" placeholder="name@domain.com" required>
+                        </div>
+                        <div class="input-form-group">
+                            <label>Mobile Telephony Number</label>
+                            <input type="tel" placeholder="+91 XXXXX XXXXX" required>
+                        </div>
+                        <div class="input-form-group">
+                            <label>Generate Account Password</label>
+                            <input type="password" placeholder="Minimum 8 characters" minlength="8" required>
+                        </div>
+                        <button type="submit" class="btn-primary full-width-modifier form-action-spacer">Deploy Digital Identity Vault &rarr;</button>
+                    </form>
+                </div>
+
+                <!-- Onboarding Step Doctor (1 of 4): Hospital Parameter Fields -->
+                <div id="signup-step-provider" class="signup-pipeline-node">
+                    <div class="form-context-header">
+                        <span class="pipeline-breadcrumb" onclick="resetSignupPipeline()">&larr; Back to Options</span>
+                        <span class="pill-badge" style="float: right;">Step 1 of 4: Parameters Sheet</span>
+                        <h3>Hospital Profile Parameters</h3>
+                        <p>Provide basic operational data matching your facility registration files.</p>
+                    </div>
+                    
+                    <div class="scrolling-form-body-wrapper">
+                        <form onsubmit="processProviderRegistryStream(event)" id="provider-onboarding-form">
+                            <div class="input-form-group-row">
+                                <div class="input-form-group">
+                                    <label>Hospital Owner / Director Name</label>
+                                    <input type="text" id="doc-owner-name" placeholder="e.g., Manzoor Ahmad" required>
+                                </div>
+                                <div class="input-form-group">
+                                    <label>Hospital Owner Email ID</label>
+                                    <input type="email" id="doc-owner-email" placeholder="name@domain.com" required>
+                                </div>
+                            </div>
+                            <div class="input-form-group-row">
+                                <div class="input-form-group">
+                                    <label>Hospital Owner Mob No</label>
+                                    <input type="tel" id="doc-owner-tel" placeholder="e.g., 9988XXXXXX" required>
+                                </div>
+                                <div class="input-form-group">
+                                    <label>Medical Superintendent / Manager</label>
+                                    <input type="text" id="doc-super-name" placeholder="Dr. Sarah Jenkins" required>
+                                </div>
+                            </div>
+                            <div class="input-form-group-row">
+                                <div class="input-form-group">
+                                    <label>Superintendent Manager No</label>
+                                    <input type="tel" id="doc-super-tel" placeholder="Enter Contact No..." required>
+                                </div>
+                                <div class="input-form-group">
+                                    <label>Reception Contact Node</label>
+                                    <input type="tel" id="doc-reception-tel" placeholder="Enter Desk No..." required>
+                                </div>
+                            </div>
+                            <div class="input-form-group-row">
+                                <div class="input-form-group">
+                                    <label>Ambulance Helpline Number</label>
+                                    <input type="tel" id="doc-ambulance-tel" placeholder="Enter Emergency No..." required>
+                                </div>
+                                <div class="input-form-group">
+                                    <label>Official Facility / Clinic Name</label>
+                                    <input type="text" id="doc-clinic-title" placeholder="Apex General Hospital" required>
+                                </div>
+                            </div>
+                            <div class="input-form-group">
+                                <label>Registered Address Vector Location</label>
+                                <input type="text" id="doc-address" placeholder="Kanpur, Uttar Pradesh, India" required>
+                            </div>
+                            <div class="input-form-group">
+                                <label>Configure Portal Administrator Password</label>
+                                <input type="password" id="doc-password" placeholder="Create strong access hash" minlength="8" required>
+                            </div>
+                            <button type="submit" class="btn-primary full-width-modifier form-action-spacer">Save Parameters & Proceed &rarr;</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Onboarding Step Doctor (2 of 4): Contract Review Canvas -->
+                <div id="signup-step-agreement" class="signup-pipeline-node">
+                    <div class="form-context-header">
+                        <span class="pill-badge" style="float: right;">Step 2 of 4: Contract Audit</span>
+                        <h2>PulseOne Strategic Partnership Agreement</h2>
+                        <p>Natively scroll or review the core framework terms template. Download the draft copy to unlock compliance verification file staging nodes.</p>
+                    </div>
+
+                    <div class="scrolling-form-body-wrapper">
+                        <div class="native-pdf-iframe-container">
+                            <iframe src="../assets/PulseOne Hospital Agreement.pdf" width="100%" height="100%" style="border:none; border-radius:10px;"></iframe>
+                        </div>
+                    </div>
+
+                    <div class="agreement-flow-actions">
+                        <button type="button" class="btn-primary full-width-modifier" style="background-color: var(--p1-dark-slate);" onclick="downloadOriginalDraftCopy()">Download Draft Copy (PDF)</button>
+                        <button type="button" id="btn-agreement-continue-step" class="btn-primary full-width-modifier disabled-opacity-lock form-action-spacer" disabled onclick="advanceFromAgreementToUploads()">Terms Evaluated, Proceed to Uploads &rarr;</button>
+                    </div>
+                </div>
+
+   <!-- STEP 3 OF 4: COMPLIANCE UPLOADS & ATTESTATION -->
+<div id="signup-step-verification" class="signup-pipeline-node">
+    <div class="form-context-header">
+        <span class="pill-badge" style="float: right;">Step 3 of 4: Attestation Seals</span>
+        <h2>Verification & Legal Signatures Binding</h2>
+        <p>Upload your institutional certifications, financial clearings, and capture handwritten signature data streams to endorse your contract token.</p>
+    </div>
+
+    <div class="scrolling-form-body-wrapper">
+        <form onsubmit="processVerificationMatrixStream(event)">
+            <!-- UPDATED GRID: Reflecting all required documents from Screenshot 2026-06-17 235651.png -->
+            <div class="four-cell-upload-grid" style="grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 24px;">
+                
+                <!-- 1. Hospital Registrations -->
+                <div class="upload-dropzone-box" onclick="document.getElementById('file-hospital-reg').click()">
+                    <input type="file" id="file-hospital-reg" accept="application/pdf,image/*" style="display:none" onchange="updateUploadLabel(this)" required>
+                    <span class="upload-icon">&#127973;</span>
+                    <strong>Hospital Registrations All Paper</strong>
+                    <span>NABH, Rohini, CMO Documents</span>
+                </div>
+
+                <!-- 2. Company Registration Paper -->
+                <div class="upload-dropzone-box" onclick="document.getElementById('file-company-reg').click()">
+                    <input type="file" id="file-company-reg" accept="application/pdf,image/*" style="display:none" onchange="updateUploadLabel(this)" required>
+                    <span class="upload-icon">&#128188;</span>
+                    <strong>Company Registration Paper</strong>
+                    <span>Hospital PAN, CIN, GST, MSME</span>
+                </div>
+
+                <!-- 3. Hospital Cancel Cheque -->
+                <div class="upload-dropzone-box" onclick="document.getElementById('file-cancel-cheque').click()">
+                    <input type="file" id="file-cancel-cheque" accept="application/pdf,image/*" style="display:none" onchange="updateUploadLabel(this)" required>
+                    <span class="upload-icon">&#128179;</span>
+                    <strong>Hospital Cancel Cheque</strong>
+                    <span>Bank Clearing Verification</span>
+                </div>
+
+                <!-- 4. Hospital Profile / Brochure -->
+                <div class="upload-dropzone-box" onclick="document.getElementById('file-hospital-profile').click()">
+                    <input type="file" id="file-hospital-profile" accept="application/pdf,image/*" style="display:none" onchange="updateUploadLabel(this)" required>
+                    <span class="upload-icon">&#128203;</span>
+                    <strong>Hospital Profile Document</strong>
+                    <span>Operational Overview / Capacity</span>
+                </div>
+
+                <!-- 5. Hospital E-Bill -->
+                <div class="upload-dropzone-box" onclick="document.getElementById('file-hospital-ebill').click()">
+                    <input type="file" id="file-hospital-ebill" accept="application/pdf,image/*" style="display:none" onchange="updateUploadLabel(this)" required>
+                    <span class="upload-icon">&#128184;</span>
+                    <strong>Hospital E-Bill Paper</strong>
+                    <span>Utility Proof / Address Verification</span>
+                </div>
+
+                <!-- 6. Director & Owner KYC -->
+                <div class="upload-dropzone-box" onclick="document.getElementById('file-owner-kyc').click()">
+                    <input type="file" id="file-owner-kyc" accept="application/pdf,image/*" style="display:none" onchange="updateUploadLabel(this)" required>
+                    <span class="upload-icon">&#127385;</span>
+                    <strong>Director & Owner KYC Stack</strong>
+                    <span>Aadhaar, PAN, Doctor Licenses</span>
+                </div>
+
+            </div>
+
+            <!-- Signature Capture Canvas Box Layout Node -->
+            <div id="dz-sig-capture" class="upload-dropzone-box" style="margin-bottom: 20px; width: 100%;" onclick="document.getElementById('file-signature-capture').click()">
+                <input type="file" id="file-signature-capture" accept="image/png,image/jpeg,image/jpg" style="display:none" onchange="processHandwrittenSignatureAssetInbound(this)" required>
+                <span class="upload-icon">&#128393;</span>
+                <strong>Handwritten Signature Graphic Seal</strong>
+                <span id="sig-upload-caption-tracker">PNG or JPEG clear graphic asset file</span>
+            </div>
+
+            <div class="input-form-group">
+                <label>Type Representative Attestation Legal Name (Digital Seal Binding)</label>
+                <input type="text" id="attestation-typed-name" placeholder="e.g., Manzoor Ahmad" required>
+            </div>
+            
+            <button type="submit" class="btn-primary full-width-modifier form-action-spacer">Authorize Verification Layers &rarr;</button>
+        </form>
+    </div>
+</div>
+
+                <!-- Onboarding Step Doctor (4 of 4): Download Signed Agreement & Forward Launch -->
+                <div id="signup-step-final-contract" class="signup-pipeline-node">
+                    <div class="form-context-header">
+                        <span class="pill-badge" style="background-color: var(--p1-mint-bg); color: var(--p1-emerald); float: right;">Step 4 of 4: System Integration Ready</span>
+                        <h2>Strategic Agreement Executed</h2>
+                        <p>Your institutional data vectors and certification layers have been successfully mapped to the final document frame. Download the executed layout to deploy your system terminal console.</p>
+                    </div>
+
+                    <div class="scrolling-form-body-wrapper">
+                        <div class="receipt-manifest-display-card">
+                            <div class="receipt-header-branding">
+                                <h4>PULSEONE PLATFORM ARCHITECTURE DISPATCH</h4>
+                                <p>PulseOne Coordinated Care Infrastructure Network Node</p>
+                            </div>
+                            <div class="receipt-parameter-body-rows">
+                                <p><strong>Partner Facility Node:</strong> <span id="rec-fill-clinic" style="color: var(--p1-emerald); font-weight:700;">-</span></p>
+                                <p><strong>Attestation Representative:</strong> <span id="rec-fill-name">-</span></p>
+                                <p><strong>Primary Registry Node Email:</strong> <span id="rec-fill-email">-</span></p>
+                                <p style="margin-top:12px; margin-bottom:4px;"><strong>Partner Signature Staged:</strong></p>
+                                <div id="rec-fill-signature-frame" style="padding: 8px; background: #FFFFFF; border: 1px solid var(--p1-slate-200); border-radius: 6px; width: max-content; min-width: 120px; min-height: 45px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="agreement-flow-actions">
+                        <button type="button" class="btn-primary full-width-modifier" onclick="generateAndSaveOfficialAgreementPDF()">Download Executed 8-Page PDF Contract</button>
+                        <button type="button" id="btn-final-dashboard-launch" class="btn-primary full-width-modifier disabled-opacity-lock form-action-spacer" style="background-color: var(--p1-emerald);" disabled onclick="executePartnerOnboardingFinalization()">Launch Clinical Command Dashboard &rarr;</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MAIN CORE APPLICATION SCRIPT COUPLING LINK -->
+    <script src="auth.js"></script>
+</body>
+</html>

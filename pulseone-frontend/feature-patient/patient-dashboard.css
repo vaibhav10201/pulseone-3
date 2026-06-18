@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PATIENT OPERATIONS CONTROL PORTAL SPECIFIC VISUAL STYLING
+   PATIENT OPERATIONS CONTROL PORTAL VISUAL STYLING (RESTORED COMPLETE)
    ========================================================================== */
 
 /* Page View Base System Fixes */
@@ -219,7 +219,7 @@
     background: #113E35;
 }
 
-/* Advanced Filtration Parameters Block layout */
+/* Advanced Filtration Parameters Block Layout (Fixed Alignment from image_986356.png) */
 .advanced-filter-parameter-panel {
     display: grid;
     grid-template-columns: repeat(3, 1fr) max-content;
@@ -248,31 +248,38 @@
 .filter-dropdown-selector select {
     background: var(--clr-stark-white);
     border: 1px solid #CCDAD4;
-    padding: 10px 14px;
+    padding: 12px 14px;
     font-family: var(--font-sans);
-    font-size: 13px;
+    font-size: 14px;
     color: var(--clr-navy);
     border-radius: 8px;
     outline: none;
     cursor: pointer;
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .btn-clear-filters-ghost {
     background: transparent;
-    border: 1px solid transparent;
+    border: 1px solid #CCDAD4;
     color: var(--clr-text-muted);
     font-family: var(--font-sans);
     font-weight: 600;
     font-size: 13px;
     cursor: pointer;
-    padding: 12px;
+    padding: 12px 20px;
+    background-color: var(--clr-stark-white);
+    border-radius: 8px;
+    transition: var(--transition-snappy);
 }
 
 .btn-clear-filters-ghost:hover {
     color: #EF4444;
+    border-color: #EF4444;
 }
 
-/* Broadcast Options Panel Ingestion Card */
+/* Broadcast Options Panel Ingestion Card (Restored Custom Button Layout) */
 .broadcast-trigger-callout-card {
     background: linear-gradient(90deg, #0A2923 0%, #154D3F 100%);
     border-radius: 16px;
@@ -291,6 +298,7 @@
     font-size: 18px;
     color: var(--clr-emerald);
     margin-bottom: 4px;
+    font-weight: 600;
 }
 
 .broadcast-meta-pack p {
@@ -302,7 +310,7 @@
 }
 
 .btn-broadcast-action {
-    background: var(--clr-emerald);
+    background-color: var(--clr-emerald);
     color: var(--clr-navy);
     border: none;
     padding: 14px 28px;
@@ -313,6 +321,7 @@
     cursor: pointer;
     white-space: nowrap;
     transition: var(--transition-snappy);
+    box-shadow: 0 4px 12px rgba(70, 228, 131, 0.2);
 }
 
 .btn-broadcast-action:hover {
@@ -320,23 +329,37 @@
     transform: translateX(2px);
 }
 
-/* Featured General Practitioners Grid Row Blocks */
+/* Featured General Practitioners Grid Row Blocks (Fixed from image_986356.png) */
 .section-header-left-aligned {
     margin-bottom: 36px;
 }
 
+.pill-badge.badge-green {
+    display: inline-block;
+    background: var(--clr-mint-bg);
+    color: #15803D;
+    padding: 4px 12px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
 .section-header-left-aligned h2 {
     font-family: var(--font-serif);
-    font-size: 2rem;
-    font-weight: 400;
-    margin-top: 12px;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-top: 8px;
     color: var(--clr-navy);
 }
 
 .section-header-left-aligned p {
     font-family: var(--font-sans);
-    font-size: 14px;
+    font-size: 15px;
     color: var(--clr-text-muted);
+    margin-top: 6px;
 }
 
 .general-docs-horizontal-grid {
@@ -350,43 +373,50 @@
     background: #FFFFFF;
     border: 1px solid #E6EEEA;
     border-radius: 16px;
-    padding: 20px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 16px;
-    box-shadow: 0 4px 12px rgba(10,41,35,0.01);
+    gap: 20px;
+    box-shadow: 0 4px 20px rgba(10,41,35,0.03);
     transition: var(--transition-smooth);
 }
 
 .general-doc-mini-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 24px rgba(10,41,35,0.04);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(10,41,35,0.08);
     border-color: var(--clr-emerald);
 }
 
 .mini-card-top {
     display: flex;
-    gap: 14px;
+    gap: 16px;
     align-items: center;
 }
 
 .mini-avatar {
-    width: 54px;
-    height: 54px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     background-size: cover;
     background-position: top center;
-    border: 1px solid #CCDAD4;
+    border: 2px solid #CCDAD4;
+    background-color: #E2F6EC;
 }
 
 .doc-gen-1 { background-image: url('https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg'); }
 .doc-gen-2 { background-image: url('https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg'); }
 .doc-gen-3 { background-image: url('https://images.pexels.com/photos/3055653/pexels-photo-3055653.jpeg'); }
 
+.mini-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
 .mini-meta h4 {
     font-family: var(--font-sans);
-    font-size: 15px;
+    font-size: 16px;
     color: var(--clr-navy);
     font-weight: 700;
     line-height: 1.2;
@@ -399,7 +429,7 @@
 }
 
 .mini-exp {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--clr-text-muted);
     font-family: var(--font-sans);
 }
@@ -407,11 +437,12 @@
 .mini-rating {
     background: #FEF3C7;
     color: #92400E;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
-    padding: 1px 6px;
-    border-radius: 4px;
+    padding: 2px 8px;
+    border-radius: 6px;
     display: inline-block;
+    width: max-content;
     margin-bottom: 2px;
     font-family: var(--font-sans);
 }
@@ -421,11 +452,11 @@
     justify-content: space-between;
     align-items: center;
     border-top: 1px solid #F0F5F2;
-    padding-top: 12px;
+    padding-top: 16px;
 }
 
 .mini-fee {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--clr-navy);
     font-family: var(--font-sans);
@@ -433,30 +464,32 @@
 
 .mini-fee small {
     font-weight: 500;
-    font-size: 11px;
+    font-size: 12px;
     color: var(--clr-text-muted);
 }
 
 .btn-mini-consult {
-    background: var(--clr-navy);
+    background-color: var(--clr-navy);
     color: #FFFFFF;
     border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
+    padding: 10px 20px;
+    border-radius: 8px;
     font-family: var(--font-sans);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition-snappy);
+    box-shadow: 0 4px 10px rgba(10, 41, 35, 0.1);
 }
 
 .btn-mini-consult:hover {
     background: var(--clr-emerald);
     color: var(--clr-navy);
+    box-shadow: 0 4px 12px rgba(70, 228, 131, 0.3);
 }
 
 /* ==========================================================================
-   SECTION 2: LIVE BROADCAST BIDDING ARENA CORRIDOR
+   SECTION 2: REAL-TIME BROADCAST BIDDING ARENA CORRIDOR
    ========================================================================== */
 .functional-pulse-link {
     display: flex !important;
@@ -551,7 +584,7 @@
 }
 
 .asset-doc-1 { background-image: url('https://images.pexels.com/photos/4173251/pexels-photo-4173251.jpeg'); }
-.asset-doc-2 { background-image: url('https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=200'); }
+.asset-doc-2 { background-image: url('https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg'); }
 .asset-doc-3 { background-image: url('https://images.pexels.com/photos/3845126/pexels-photo-3845126.jpeg'); }
 
 .doc-identity-details {
@@ -648,7 +681,7 @@
 }
 
 /* ==========================================================================
-   SECTION 4: ROYALTY INSURANCE PRICING MATRICES
+   SECTION 4: ROYALTY ELITE TIERS
    ========================================================================== */
 .royalty-checkout-dashboard-canvas {
     background: #FFFFFF;
@@ -1023,4 +1056,16 @@
         width: 100%;
         text-align: center;
     }
+}
+
+/* Add to your CSS file */
+.doctor-card {
+    position: relative;
+    z-index: 10; /* Ensures cards sit above background layers */
+}
+
+.btn-fix-appoint {
+    position: relative;
+    z-index: 20; /* Ensures button is clickable */
+    pointer-events: auto;
 }

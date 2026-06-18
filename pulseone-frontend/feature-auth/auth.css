@@ -1,0 +1,291 @@
+/* ==========================================================================
+   PULSEONE GREEN CORPORATE DESIGN SYSTEM - AUTH SPLIT PORTAL TERMINAL
+   ========================================================================== */
+
+:root {
+    --p1-dark-slate: #0C141F;
+    --p1-emerald: #16a34a;
+    --p1-emerald-hover: #14532d;
+    --p1-mint-bg: #F0FDF4;
+    --p1-slate-800: #1E293B;
+    --p1-slate-700: #334155;
+    --p1-slate-500: #64748B;
+    --p1-slate-400: #94A3B8;
+    --p1-slate-200: #E2E8F0;
+    --p1-slate-50: #F8FAFC;
+    
+    --p1-studio-white: #FFFFFF;
+    --p1-field-bg: #FFFFFF;
+    --p1-border-light: #CCDAD4;
+    
+    --ff-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --ff-serif: 'Merriweather', serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body.auth-engine-body {
+    font-family: var(--ff-sans);
+    background-color: var(--p1-studio-white);
+    color: var(--p1-slate-800);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ==========================================================================
+   STABLE FLEX SPLIT LAYOUT ENGINE (BALANCED 50-50 WIDE ASPECT DESIGN)
+   ========================================================================== */
+.auth-split-wrapper {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Left Brand Informational Panel */
+.auth-canvas-panel {
+    flex: 1;
+    background-color: var(--p1-dark-slate);
+    padding: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.canvas-branding { 
+    cursor: pointer; 
+    z-index: 2; 
+}
+
+.canvas-statement-box { 
+    z-index: 2; 
+    margin-top: auto; 
+    max-width: 540px; 
+}
+
+.canvas-statement-box h2.serif-title-canvas { 
+    font-family: var(--ff-serif); 
+    font-size: clamp(2rem, 3.5vw, 2.8rem); 
+    line-height: 1.25; 
+    margin-bottom: 24px; 
+    color: #FFFFFF; 
+    font-weight: 400; 
+}
+
+.canvas-statement-box p { 
+    color: var(--p1-slate-400); 
+    font-size: 1rem; 
+    line-height: 1.6; 
+}
+
+/* Right Control Panel Workspace Frame */
+.auth-control-panel {
+    flex: 1;
+    background-color: var(--p1-studio-white);
+    padding: 48px 64px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+@media (max-width: 1024px) {
+    .auth-canvas-panel { display: none; }
+    .auth-control-panel { flex: 1; padding: 40px 24px; }
+}
+
+/* ==========================================================================
+   CONTEXT TAB TOGGLE SWITCH INTERFACE
+   ========================================================================== */
+.context-toggle-row {
+    display: flex;
+    background-color: var(--p1-slate-50);
+    padding: 6px;
+    border-radius: 12px;
+    border: 1px solid var(--p1-slate-200);
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.btn-toggle {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--p1-slate-500);
+    padding: 12px;
+    font-family: var(--ff-sans);
+    font-size: 0.92rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-toggle.active {
+    background-color: #FFFFFF;
+    color: var(--p1-dark-slate);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--p1-slate-200);
+}
+
+/* Pipeline Rendering States Driver */
+.auth-form-layer { display: none; flex-direction: column; flex: 1; min-height: 0; }
+.auth-form-layer.dynamic-active { display: flex; }
+.signup-pipeline-node { display: none; flex-direction: column; height: 100%; min-height: 0; }
+.signup-pipeline-node.active { display: flex; }
+
+/* Dynamic Smooth Internal Form Scroller */
+.scrolling-form-body-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 8px;
+    margin-bottom: 16px;
+}
+
+.scrolling-form-body-wrapper::-webkit-scrollbar { width: 6px; }
+.scrolling-form-body-wrapper::-webkit-scrollbar-track { background: transparent; }
+.scrolling-form-body-wrapper::-webkit-scrollbar-thumb { background: var(--p1-slate-200); border-radius: 10px; }
+
+.form-context-header h3 { font-size: 1.6rem; font-weight: 700; color: var(--p1-dark-slate); margin-bottom: 6px; }
+.form-context-header p { color: var(--p1-slate-500); font-size: 0.92rem; line-height: 1.5; margin-bottom: 20px; }
+
+/* ==========================================================================
+   NORMALIZED RESPONSIVE INPUT FORM CONTROLS
+   ========================================================================== */
+form { display: flex; flex-direction: column; width: 100%; }
+.input-form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; width: 100%; }
+.input-form-group-row { display: flex; gap: 16px; width: 100%; }
+.input-form-group-row .input-form-group { flex: 1; }
+
+@media (max-width: 640px) { .input-form-group-row { flex-direction: column; gap: 0; } }
+label { font-size: 0.72rem; text-transform: uppercase; font-weight: 700; color: var(--p1-slate-500); letter-spacing: 0.02em; }
+
+input[type="text"], input[type="email"], input[type="tel"], input[type="password"], select, textarea {
+    width: 100%;
+    background-color: var(--p1-field-bg);
+    border: 1px solid var(--p1-border-light);
+    padding: 12px 14px;
+    border-radius: 10px;
+    color: var(--p1-dark-slate);
+    font-family: var(--ff-sans);
+    font-size: 0.92rem;
+    outline: none;
+}
+
+input:focus, select:focus, textarea:focus { 
+    border-color: var(--p1-emerald); 
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.08); 
+}
+
+/* ==========================================================================
+   UNIFIED BRAND BUTTON INTERFACES
+   ========================================================================== */
+.btn-primary {
+    background-color: var(--p1-dark-slate);
+    color: #FFFFFF;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 10px;
+    font-family: var(--ff-sans);
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.btn-primary:hover { background-color: var(--p1-slate-800); }
+.full-width-modifier { width: 100%; }
+.form-action-spacer { margin-top: 12px; }
+.disabled-opacity-lock { opacity: 0.3; cursor: not-allowed !important; }
+
+/* ==========================================================================
+   SELECTION ROLES MATRIX & CRAD SEGMENT CARDS
+   ========================================================================== */
+.role-matrix-grid { display: flex; flex-direction: column; gap: 16px; }
+.role-selector-card { background-color: var(--p1-studio-white); border: 1px solid var(--p1-slate-200); padding: 24px; border-radius: 12px; cursor: pointer; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); position: relative; }
+.role-selector-card:hover { border-color: var(--p1-emerald); background-color: var(--p1-slate-50); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(10, 41, 35, 0.02); }
+.role-icon-indicator { position: absolute; top: 24px; right: 24px; color: var(--p1-slate-400); font-size: 1.2rem; }
+.role-selector-card h4 { font-size: 1.1rem; font-weight: 700; color: var(--p1-dark-slate); margin-bottom: 6px; }
+.role-selector-card p { color: var(--p1-slate-500); font-size: 0.88rem; line-height: 1.5; }
+
+.pipeline-breadcrumb { font-size: 0.88rem; color: var(--p1-emerald); font-weight: 600; cursor: pointer; display: inline-block; margin-bottom: 8px; }
+.pill-badge { background-color: var(--p1-slate-100); color: var(--p1-slate-700); padding: 4px 10px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
+
+/* ==========================================================================
+   FIXED: 6-CELL RESPONSIVE MEDICAL COMPLIANCE UPLOAD GRID (SCREENSHOT REPAIRS)
+   ========================================================================== */
+.four-cell-upload-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important; /* Locks dynamic column widths side-by-side */
+    gap: 16px !important;
+    width: 100% !important;
+}
+
+.upload-dropzone-box {
+    border: 1px dashed var(--p1-border-light) !important;
+    background-color: var(--p1-slate-50) !important;
+    border-radius: 10px !important;
+    padding: 20px 16px !important;
+    text-align: center !important;
+    cursor: pointer !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.upload-dropzone-box:hover {
+    border-color: var(--p1-emerald) !important;
+    background-color: var(--p1-mint-bg) !important;
+}
+
+.upload-icon {
+    font-size: 1.5rem !important;
+    color: var(--p1-emerald) !important;
+    margin-bottom: 6px !important;
+}
+
+.upload-dropzone-box strong {
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    color: var(--p1-dark-slate) !important;
+    display: block !important;
+    margin-bottom: 2px !important;
+}
+
+.upload-dropzone-box span {
+    font-size: 0.72rem !important;
+    color: var(--p1-slate-500) !important;
+    line-height: 1.3 !important;
+}
+
+/* ==========================================================================
+   STEP REVIEW BLOCKS & MANIFEST MANIFOLDS
+   ========================================================================== */
+.native-pdf-iframe-container { width: 100%; height: 320px; border: 1px solid var(--p1-slate-200); border-radius: 10px; background: var(--p1-slate-50); margin-bottom: 12px; }
+.receipt-manifest-display-card { background-color: var(--p1-slate-50); border: 1px solid var(--p1-slate-200); border-radius: 12px; padding: 20px; }
+.receipt-header-branding h4 { font-size: 0.85rem; font-weight: 700; color: var(--p1-dark-slate); margin-bottom: 2px; }
+.receipt-header-branding p { font-size: 0.75rem; color: var(--p1-slate-500); margin-bottom: 14px; }
+.receipt-parameter-body-rows p { font-size: 0.88rem; margin-bottom: 8px; color: var(--p1-slate-700); }
+
+/* ==========================================================================
+   FLOATING TOAST MESSENGER VAULT OVERLAYS
+   ========================================================================== */
+.notification-toast-alert { position: fixed; top: 24px; right: 24px; background-color: var(--p1-dark-slate); border: 1px solid rgba(255,255,255,0.1); padding: 14px 24px; border-radius: 8px; display: flex; align-items: center; gap: 16px; z-index: 10000; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3); transition: all 0.3s ease; opacity: 0; transform: translateY(-20px); pointer-events: none; }
+.notification-toast-alert.toast-visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
+.toast-content-pack { display: flex; align-items: center; gap: 12px; }
+.toast-pulse-node { width: 8px; height: 8px; background-color: var(--p1-emerald); border-radius: 50%; box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.3); }
+#notification-toast-text { font-size: 0.9rem; font-weight: 500; color: #FFFFFF; }
+.close-toast-btn { background: none; border: none; color: #FFFFFF; font-size: 1.1rem; cursor: pointer; }

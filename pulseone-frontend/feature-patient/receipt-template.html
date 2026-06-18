@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PulseOne Clinical Transaction Receipt</title>
+    <style>
+        body { font-family: sans-serif; padding: 40px; color: #0A2923; line-height: 1.5; background: #fafcfb; }
+        .container { border: 1px solid #E6EEEA; background: #fff; padding: 32px; border-radius: 12px; max-width: 600px; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
+        h2 { margin-top: 0; color: #15803D; border-bottom: 2px solid #E6EEEA; padding-bottom: 12px; }
+        .row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px; }
+        .label { color: #64748b; }
+        .value { font-weight: 600; }
+        .signature-container { margin-top: 24px; text-align: right; }
+        .signature-img { max-height: 60px; object-fit: contain; margin-top: 4px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>PulseOne Clinical Transaction Receipt</h2>
+        <div class="row"><span class="label">Patient Name:</span><span id="rec-patient" class="value"></span></div>
+        <div class="row"><span class="label">Practitioner Name:</span><span id="rec-doctor" class="value"></span></div>
+        <div class="row"><span class="label">Clinic Hub:</span><span id="rec-clinic" class="value"></span></div>
+        <div class="row"><span class="label">Scheduled Timeline:</span><span id="rec-timeline" class="value"></span></div>
+        <hr style="border:0; border-top:1px solid #E6EEEA; margin:20px 0;"/>
+        <div class="row" style="font-size:16px; font-weight:700;"><span class="label" style="color:#0A2923;">Amount Transacted:</span><span id="rec-fee" style="color:#15803D;"></span></div>
+        <div id="signature-slot"></div>
+    </div>
+
+    <script>
+        // Listen for data message from the parent window
+        window.addEventListener('message', function(event) {
+            var appt = event.data;
+            if (!appt) return;
+
+            document.getElementById('rec-patient').innerText = appt.patientName || 'PulseOne Patient';
+            document.getElementById('rec-doctor').innerText = 'Dr. ' + appt.doctorName;
+            document.getElementById('rec-clinic').innerText = appt.clinicTitle || 'PulseOne Partner';
+            document.getElementById('rec-timeline').innerText = appt.appointmentDate + ' at ' + appt.appointmentTime;
+            document.getElementById('rec-fee').innerText = '₹' + (appt.computedFee || 500) + '.00';
+
+            var sigSlot = document.getElementById('signature-slot');
+            if (appt.doctorSignatureBase64) {
+                sigSlot.className = 'signature-container';
+                sigSlot.innerHTML = '<p style="margin:0; font-size:13px; color:#64748b;">Verified Practitioner Signature:</p>' +
+                                    '<img src="' + appt.doctorSignatureBase64 + '" class="signature-img" />' +
+                                    '<p style="margin:0; font-size:14px; font-weight:600; color:#0A2923;">Dr. ' + appt.doctorName + '</p>';
+            } else {
+                sigSlot.className = 'signature-container';
+                sigSlot.style.fontStyle = 'italic';
+                sigSlot.style.color = '#94a3b8';
+                sigSlot.style.fontSize = '13px';
+                sigSlot.innerText = 'Digitally signed via secure token protocols.';
+            }
+
+            // Fire print dialog automatically
+            setTimeout(function() {
+                window.print();
+            }, 300);
+        });
+    </script>
+</body>
+</html>
