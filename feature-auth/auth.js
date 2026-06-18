@@ -21,7 +21,7 @@
    DYNAMIC MULTI-ENVIRONMENT ROUTING ENGINE (LOCAL vs PRODUCTION)
    ========================================================================== */
 const IS_PRODUCTION = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
-const API_SERVER_HOST = IS_PRODUCTION ? 'https://your-backend-app-name.onrender.com' : 'http://localhost:5000';
+const API_SERVER_HOST = IS_PRODUCTION ? 'https://pulseone-3.onrender.com' : 'http://localhost:5000';
 
 const API_PATIENT_BASE = API_SERVER_HOST + '/api/auth/patient';
 const API_DOCTOR_BASE  = API_SERVER_HOST + '/api/auth/doctor';
